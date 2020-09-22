@@ -12,6 +12,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Homepage} />
+        {/*<Route path='/path' component={Nom du component}/> */}
       </Switch>
     </div>
   );
