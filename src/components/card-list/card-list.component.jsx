@@ -3,15 +3,15 @@ import React from 'react';
 import './card-list.styles.css';
 
 import Card from '../card/card.component';
-import restaurants from '../restaurant/restaurant.data';
+
 
 const CardList = ({ items }) => (
     <div className= 'card-list'>
-        <h1 className='title'>RESTAURANTS LISTE</h1>
+        <h3 className='title'>RESTAURANTS LISTE</h3>
         <div className = 'preview'>
             {
-                restaurants
-                    .filter((restaurant, idx) => idx < 4)
+                items
+                    .filter((item, idx) => idx < 4)
                     .map(({id, ...otherItemProps}) => (
                         <Card key={id} {...otherItemProps}/>
                     ))
