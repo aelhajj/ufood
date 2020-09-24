@@ -1,24 +1,27 @@
 .card {
-  width: 22%;
+  margin: 10px;
+  height: 100%;
+  width: 500px;
   display: flex;
   flex-direction: column;
-  height: 350px;
-  align-items: center;
 }
 
-.card-info {
+.card-content {
   width: 100%;
-  height: 5%;
-  display: flex;
-  justify-content: space-between;
   font-size: 18px;
 }
 
 .name {
   width: 90%;
-  margin-bottom: 15px;
 }
 
 .cote {
   width: 10%;
+}
+
+.card-media {
+  padding-top: 100%;
+  width: 100%;
+	height: 60%;
+	overflow: hidden;
 }

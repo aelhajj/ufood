@@ -1,21 +1,25 @@
 .header {
-  height: 70px;
   width: 100%;
-  display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  color: aliceblue;
 }
 
 .logo-container {
-    height: 100%;
-    width: 50px;
-    padding: 25px;
+    height: 50%;
+    width: 50%;
   }
+
+.logo {
+  height: 50px;
+  width: 50px;
+  filter: invert();
+}
 
 .options {
     width: 50%;
     height: 100%;
     display: flex;
+    color: aliceblue;
     align-items: center;
     justify-content: flex-end;
 }
