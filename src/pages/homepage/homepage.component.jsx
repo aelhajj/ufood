@@ -1,47 +1,42 @@
-import React from 'react';
+import React from "react";
 
-import './homepage.styles.css';
+import "./homepage.styles.css";
 
-import CardList from '../../components/card-list/card-list.component';
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CardList from "../../components/card-list/card-list.component";
+import SearchBox from "../../components/search-box/search-box.component";
 
-import { SearchBox } from '../../components/search-box/search-box.component';
-
-import restaurants from '../../components/restaurant/restaurant.data';
+import restaurants from "../../components/restaurant/restaurant.data";
 
 class Homepage extends React.Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = 
-        {
-            restaurants : restaurants,
-            searchField: ''
-        };
-    }
-
-    handleChange = e => {
-        this.setState({ searchField: e.target.value });
+    this.state = {
+      restaurants: restaurants,
+      searchField: "",
     };
+  }
 
-    render() {
-        const {restaurants, searchField} = this.state;
-        const filteredRestaurants = restaurants.filter(
-            restaurants => restaurants.name.toLowerCase().includes(searchField.toLowerCase())
-        );
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value });
+  };
 
-        return (
-          <div className="homepage">
-            <CssBaseline />
-            <SearchBox
-              placeholder="search restaurants"
-              handleChange={this.handleChange}
-            />
+  render() {
+    const { restaurants, searchField } = this.state;
+    const filteredRestaurants = restaurants.filter((restaurants) =>
+      restaurants.name.toLowerCase().includes(searchField.toLowerCase())
+    );
 
-            <CardList items={filteredRestaurants} />
-          </div>
-        );
-    }
+    return (
+      <div className="homepage">
+        <SearchBox
+          placeholder="search restaurants"
+          handleChange={this.handleChange}
+        />
+        <CardList items={filteredRestaurants} />
+      </div>
+    );
+  }
 }
 
 export default Homepage;

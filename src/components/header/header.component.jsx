@@ -25,13 +25,29 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     alignSelf: "flex-end",
   },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
 }));
 
 export default function Header() {
   const classes = useStyles();
 
   return (
-    <div className="header">
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
@@ -41,7 +57,17 @@ export default function Header() {
           <div className="options">
             <div className="search-box">
               {/* La barre de recherche sera implémentée a la remise 2*/}
-              <SearchBox placeholder="search" />
+              <SearchBox
+                className={classes.search}
+                aria-label="search"
+                color="inherit"
+                placeholder="search"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
             </div>
             <Link className="option" to="/">
               Page d'acceuil

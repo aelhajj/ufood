@@ -36,9 +36,7 @@ export default function CardResto({ id, name }) {
         <Typography gutterBottom variant="h5" component="h2">
           {name}
         </Typography>
-        <Typography>
-          Ici info du resto
-        </Typography>
+        <Typography>Ici info du resto</Typography>
       </CardContent>
       <CardActions>
         <Button size="small" color="primary">
