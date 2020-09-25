@@ -22,9 +22,9 @@ export default function CardList({ items }) {
       <Grid container spacing={4}>
         {items
           /*.filter((item, idx) => idx < 5)*/
-          .map(({ id, ...otherItemProps }) => (
-            <Grid item key={CardResto} xs={6} sm={6} md={4}>
-              <CardResto key={id} {...otherItemProps} />
+          .map((item, index) => (
+            <Grid item key={index} xs={6} sm={6} md={4}>
+              <CardResto data={item} />
             </Grid>
           ))}
       </Grid>
