@@ -6,6 +6,7 @@ import CardList from "../../components/card-list/card-list.component";
 import SearchBox from "../../components/search-box/search-box.component";
 
 import restaurants from "../../components/restaurant/restaurant.data";
+import SearchBar from "../../components/search-bar/search-bar.component";
 
 class Homepage extends React.Component {
   constructor() {
@@ -33,6 +34,7 @@ class Homepage extends React.Component {
           placeholder="search restaurants"
           handleChange={this.handleChange}
         />
+        <SearchBar />
         <CardList items={filteredRestaurants} />
       </div>
     );

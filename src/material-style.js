@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,4 +35,3 @@ export default useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
   },
 }));
-
