@@ -1,7 +1,7 @@
 const restaurants = [
   {
     id: 1,
-    name: "Restaurant Nonya Cuisine Indonésienne",
+    name: "Restaurant Nonya",
     address: "151 Rue Bernard O, Montréal, QC H2T 2K3, Canada",
     phone: "+15148759998",
     location: {
@@ -42,7 +42,7 @@ const restaurants = [
       "https://images.unsplash.com/photo-1525148341418-5c2ea406191c?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
       "https://images.unsplash.com/photo-1551530078-379240770349?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
     ],
-    gender: "LGBTQ friendly",
+    gender: "Indonesian",
     price_min: 30,
     price_max: 300,
     rating: 4.3,
@@ -90,7 +90,7 @@ const restaurants = [
       "https://images.unsplash.com/photo-1563551281520-cf166ad529ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
       "https://images.unsplash.com/photo-1498491751984-14acb85d7d90?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
     ],
-    gender: "LGBTQ friendly",
+    gender: "Greek",
     price_min: 30,
     price_max: 300,
     rating: 4.8,
@@ -139,7 +139,7 @@ const restaurants = [
       "https://images.unsplash.com/photo-1540086015396-f0b458832b38?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
       "https://images.unsplash.com/photo-1531973904483-02b6311f3d90?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
     ],
-    gender: "LGBTQ friendly",
+    gender: ["Sushi", "Japanese"],
     price_min: 30,
     price_max: 400,
     rating: 4,

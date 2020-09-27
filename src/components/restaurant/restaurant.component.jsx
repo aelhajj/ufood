@@ -7,16 +7,26 @@ import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
 import restaurants from "./restaurant.data";
 
+
+
 class Restaurant extends React.Component {
   render() {
     const { id, edit } = this.props.match.params;
     const data = restaurants.find((r) => r.id === parseInt(id));
-
     if (edit === "edit") return <RestaurantEdit data={data} />;
-
+    
+    //const { compose, withProps, lifecycle } = require("recompose");
+    const {
+      withScriptjs,
+      withGoogleMap,
+      GoogleMap,
+      DirectionsRenderer,
+    } = require("react-google-maps");
+    
     const GoogleMapExample = withGoogleMap((props) => (
       <GoogleMap defaultCenter={data.location} defaultZoom={17}>
         <Marker position={data.location} />
+        
       </GoogleMap>
     ));
 
@@ -40,6 +50,7 @@ class Restaurant extends React.Component {
           }
           mapElement={<div style={{ height: `100%` }} />}
         />
+
         <Rating
           name="half-rating-read"
           value={data.rating}

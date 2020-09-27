@@ -3,10 +3,11 @@ import React from "react";
 import "./homepage.styles.css";
 
 import CardList from "../../components/card-list/card-list.component";
-import SearchBox from "../../components/search-box/search-box.component";
-
 import restaurants from "../../components/restaurant/restaurant.data";
 import SearchBar from "../../components/search-bar/search-bar.component";
+import { makeStyles } from "@material-ui/core/styles";
+
+
 
 class Homepage extends React.Component {
   constructor() {
@@ -21,8 +22,11 @@ class Homepage extends React.Component {
   handleChange = (e) => {
     this.setState({ searchField: e.target.value });
   };
+  
 
   render() {
+    
+   
     const { restaurants, searchField } = this.state;
     const filteredRestaurants = restaurants.filter((restaurants) =>
       restaurants.name.toLowerCase().includes(searchField.toLowerCase())
@@ -30,12 +34,10 @@ class Homepage extends React.Component {
 
     return (
       <div className="homepage">
-        <SearchBox
-          placeholder="search restaurants"
-          handleChange={this.handleChange}
-        />
-        <SearchBar />
-        <CardList items={filteredRestaurants} />
+        <div >
+          <SearchBar handleChange={this.handleChange} />
+          </div>
+          <CardList items={filteredRestaurants} />
       </div>
     );
   }
