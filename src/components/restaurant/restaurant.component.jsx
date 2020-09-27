@@ -5,6 +5,7 @@ import Gallery from "react-photo-gallery";
 import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
 
 
 import restaurants from "./restaurant.data";
@@ -96,10 +97,15 @@ class Restaurant extends React.Component {
             </h3>
           </Grid>
           <Grid item xs={6}>
-            <h3>
-              {" "}
-              Associated types : <span className="value">{data.gender}</span>
-            </h3>
+            <h3>Associated types : </h3>
+            {data.genres.map((e, index) => (
+              <Chip
+                label={e}
+                variant="outlined"
+                color="secondary"
+                key={index}
+              />
+            ))}
           </Grid>
         </Grid>
       </div>

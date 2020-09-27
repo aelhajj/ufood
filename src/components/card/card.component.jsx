@@ -54,9 +54,9 @@ export default function CardResto({ data }) {
             View
           </Button>
         </Link>
-        <Link className="review-link" to={`/restaurant/${data.id}/edit`}>
+        <Link className="review-link">
           <Button size="small" color="primary">
-            Edit
+            Directions
           </Button>
         </Link>
       </CardActions>
