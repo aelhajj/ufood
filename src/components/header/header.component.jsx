@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import SearchBox from "../search-box/search-box.component";
+import Button from "@material-ui/core/Button";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -62,6 +62,7 @@ export default function Header() {
           <Link className="logo-container" to="/">
             <Logo className={classes.menuButton} width="60" height="60" />
           </Link>
+
           <div className="options" style={{ display: "flex" }}>
             <div className="search-box" style={{ marginRight: "20px" }}>
               {/* La barre de recherche sera implémentée a la remise 2*/}
@@ -81,10 +82,13 @@ export default function Header() {
               <Link className="review-link" to={`/profile/john`}>
                 <Avatar
                   alt="avatar"
-                  src={`https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
+                  src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
                 />
               </Link>
             </div>
+            <Link>
+              <Button disabled>Sign Off</Button>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
@@ -92,27 +96,3 @@ export default function Header() {
   );
 }
 
-/*
-const Header = () => (
-  <div className="header">
-    <CssBaseline />
-    <AppBar position="relative">
-      <Toolbar>
-        <Link className="logo-container" to="/">
-          <Logo className="logo" />
-        </Link>
-        <div className="options">
-          <div className="search-box">
-            {/* La barre de recherche sera implémentée a la remise 2 }
-            <SearchBox placeholder="search" />
-          </div>
-          <Link className="option" to="/">
-            Page d'acceuil
-          </Link>
-        </div>
-      </Toolbar>
-    </AppBar>
-  </div>
-);
-
-*/

@@ -14,12 +14,12 @@ class Profile extends React.Component {
         <div style={{ textAlign: "center" }}>
           <img
             alt="avatar"
-            src={`https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
+            src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
             width={200}
             height={200}
             style={{ borderRadius: "50%" }}
           />
-          <h1> JOHN SMITH</h1>
+          <h1> Uncle Iroh </h1>
           <h2>SCORE: 100</h2>
         </div>
         <div style={{ textAlign: "center" }}>

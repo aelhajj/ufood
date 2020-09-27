@@ -14,14 +14,16 @@ import Rating from "@material-ui/lab/Rating";
 const useStyles = makeStyles((theme) => ({
   card: {
     display: "flex",
+    height: "100%",
     flexDirection: "column",
   },
   cardMedia: {
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "56.25%", 
   },
   cardContent: {
     flexGrow: 1,
   },
+  
 }));
 
 export default function CardResto({ data }) {

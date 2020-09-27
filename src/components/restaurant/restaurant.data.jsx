@@ -102,8 +102,8 @@ const restaurants = [
       "2871 Boulevard des Promenades, Sainte-Marthe-sur-le-Lac, QC J0N 1P0, Canada",
     phone: "+14504131110",
     location: {
-      lat: 45.5568362,
-      lng: -74.2893421,
+      lat: 45.5254798,
+      lng: -73.6040783,
     },
     open_hours: [
       {
@@ -150,8 +150,8 @@ const restaurants = [
     address: "551 Rue Saint-Martin, Montréal, QC H3J 2L6, Canada",
     phone: "+15144472717",
     location: {
-      lat: 45.5568372,
-      lng: -74.2893406,
+      lat: 45.5254798,
+      lng: -73.6040783,
     },
     open_hours: [
       {
@@ -199,8 +199,8 @@ const restaurants = [
       "The Walt Disney Concert Hall, 141 S Grand Ave, Los Angeles, CA 90012",
     phone: "+12139723331",
     location: {
-      lat: 34.0516861,
-      lng: -118.2647286,
+      lat: 45.5254798,
+      lng: -73.6040783,
     },
     open_hours: [
       {

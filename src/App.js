@@ -2,10 +2,9 @@ import React from "react";
 import "./App.css";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import Layout, {
-  Root
-} from "@mui-treasury/layout";
+import Layout, { Root } from "@mui-treasury/layout";
 
 import { Switch, Route } from "react-router-dom";
 
@@ -14,33 +13,49 @@ import Restaurant from "./components/restaurant/restaurant.component";
 import Profile from "./pages/profile/profile.component";
 import HeaderFood from "./components/header/header.component";
 
-
 const scheme = Layout();
 
-scheme.configureHeader((builder) => {
-  builder.registerConfig("xs", {
-    position: "sticky",
-  });
-});
-
-scheme.configureInsetSidebar((builder) => {
-  builder.create("insetSidebar", { anchor: "left" }).registerFixedConfig("sm", {
-    width: 256,
-  });
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#fff",
+      main: "#e5989b",
+      dark: "#000",
+    },
+    secondary: {
+      main: "#b5838d",
+    },
+  },
+  typography: {
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+  },
 });
 
 function App() {
   return (
     <Root scheme={scheme}>
-      <CssBaseline />
-      <HeaderFood />
-      <main>
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <Route exact path="/restaurant/:id/:edit" component={Restaurant} />
-          <Route exact path="/profile/:id" component={Profile} />
-        </Switch>
-      </main>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <HeaderFood />
+        <main>
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            <Route exact path="/restaurant/:id/:edit" component={Restaurant} />
+            <Route exact path="/profile/:id" component={Profile} />
+          </Switch>
+        </main>
+      </MuiThemeProvider>
     </Root>
   );
 }
