@@ -24,7 +24,7 @@ export default function CardList({ items, visited }) {
           /*.filter((item, idx) => idx < 5)*/
           .map((item, index) => (
             <Grid item key={index} xs={6} sm={6} md={4}>
-              <CardResto data={item} visited={visited}/>
+              <CardResto data={item} visited={visited} />
             </Grid>
           ))}
       </Grid>

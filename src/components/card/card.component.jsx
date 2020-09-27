@@ -1,16 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
+import {
+  Badge,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  CssBaseline,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
+
 import Rating from "@material-ui/lab/Rating";
-import { Badge } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -29,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   padding: {
     padding: theme.spacing(0, 2),
-  }
-
+  },
 }));
 
 export default function CardResto({ data, visited }) {
@@ -66,16 +68,22 @@ export default function CardResto({ data, visited }) {
             Directions
           </Button>
         </Link>
-        {
-          visited ?
-            <Badge color="error" badgeContent={data.visited} className={classes.margin}>
-              <Button size="small" color="primary" disableRipple style={{ cursor: 'unset' }}>
-                Visited
-              </Button>
-            </Badge>
-            :
-            null
-        }
+        {visited ? (
+          <Badge
+            color="error"
+            badgeContent={data.visited}
+            className={classes.margin}
+          >
+            <Button
+              size="small"
+              color="primary"
+              disableRipple
+              style={{ cursor: "unset" }}
+            >
+              Visited
+            </Button>
+          </Badge>
+        ) : null}
       </CardActions>
     </Card>
   );

@@ -1,22 +1,18 @@
 import React from "react";
 
-import Rating from "@material-ui/lab/Rating";
 import Gallery from "react-photo-gallery";
 import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
-
-
-import restaurants from "./restaurant.data";
 import { Grid, Box } from "@material-ui/core";
 import InfoCard from "../info-card/info-card.component";
 import DirectionCard from "../direction-card/direction-card.component";
 
+import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+
+import restaurants from "./restaurant.data";
 
 class Restaurant extends React.Component {
   render() {
-    
     const { id, edit } = this.props.match.params;
     const data = restaurants.find((r) => r.id === parseInt(id));
     if (edit === "edit") return <RestaurantEdit data={data} />;
@@ -47,12 +43,7 @@ class Restaurant extends React.Component {
         <h1>{data.name}</h1>
         <Grid item xs={6}>
           {data.genres.map((e, index) => (
-            <Chip
-              label={e}
-              variant="outlined"
-              color="secondary"
-              key={index}
-            />
+            <Chip label={e} variant="outlined" color="secondary" key={index} />
           ))}
         </Grid>
         <Box mt={2}>
@@ -61,19 +52,13 @@ class Restaurant extends React.Component {
         <Box mt={2}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-              <InfoCard
-                {...data}
-              />
+              <InfoCard {...data} />
             </Grid>
             <Grid item xs={12} md={6}>
-              <DirectionCard
-                {...data}
-              />
+              <DirectionCard {...data} />
             </Grid>
           </Grid>
         </Box>
-        
-        
       </div>
     );
   }

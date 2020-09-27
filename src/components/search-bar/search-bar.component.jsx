@@ -1,10 +1,9 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import SearchBox from "../search-box/search-box.component";
-import TextField from "@material-ui/core/TextField";
+import { Grid, TextField, makeStyles } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+
+import SearchBox from "../search-box/search-box.component";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +38,7 @@ export default function SearchBar({ handleChange }) {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.paper} container spacing={3}>
+    <Grid container className={classes.paper} spacing={3}>
       <Grid item xs={12}>
         <SearchBox
           className={classes.paper}

@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
-import SearchBox from "../search-box/search-box.component";
-import Button from "@material-ui/core/Button";
 
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Avatar from "@material-ui/core/Avatar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  Avatar,
+  CssBaseline,
+  makeStyles,
+  Box,
+} from "@material-ui/core";
+
+import SearchBox from "../search-box/search-box.component";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,41 +83,44 @@ export default function Header() {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            {
-              logged ?
-                <div style={{ cursor: "pointer" }}>
-                  <Link className="review-link" to={`/profile/john`}>
-                    <Avatar
-                      alt="avatar"
-                      src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
-                    />
-                  </Link>
-                </div>
-                :
-                null
-            }
-            {
-              logged ?
-                <Box ml={1}>
-                  <Link to={`/`}>
-                    <Button
-                      className="auth"
-                      onClick={() => { setLogged(false) }}
-                    >Sign Off</Button>
-                  </Link>
-                </Box>
-                :
-                <Link>
+            {logged ? (
+              <div style={{ cursor: "pointer" }}>
+                <Link className="review-link" to={`/profile/Iroh`}>
+                  <Avatar
+                    alt="avatar"
+                    src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
+                  />
+                </Link>
+              </div>
+            ) : null}
+            {logged ? (
+              <Box ml={1}>
+                <Link to={`/`}>
                   <Button
                     className="auth"
-                    onClick={() => { setLogged(true) }}
-                  >Sign In</Button>
+                    onClick={() => {
+                      setLogged(false);
+                    }}
+                  >
+                    Sign Off
+                  </Button>
                 </Link>
-            }
+              </Box>
+            ) : (
+              <Link>
+                <Button
+                  className="auth"
+                  onClick={() => {
+                    setLogged(true);
+                  }}
+                >
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
-
