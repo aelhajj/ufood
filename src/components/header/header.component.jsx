@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import SearchBox from "../search-box/search-box.component";
@@ -9,6 +9,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
+  const [logged, setLogged] = useState(false);
 
   return (
     <div className={classes.root}>
@@ -78,17 +80,37 @@ export default function Header() {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            <div style={{ cursor: "pointer" }}>
-              <Link className="review-link" to={`/profile/john`}>
-                <Avatar
-                  alt="avatar"
-                  src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
-                />
-              </Link>
-            </div>
-            <Link>
-              <Button disabled>Sign Off</Button>
-            </Link>
+            {
+              logged ?
+                <div style={{ cursor: "pointer" }}>
+                  <Link className="review-link" to={`/profile/john`}>
+                    <Avatar
+                      alt="avatar"
+                      src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
+                    />
+                  </Link>
+                </div>
+                :
+                null
+            }
+            {
+              logged ?
+                <Box ml={1}>
+                  <Link to={`/`}>
+                    <Button
+                      className="auth"
+                      onClick={() => { setLogged(false) }}
+                    >Sign Off</Button>
+                  </Link>
+                </Box>
+                :
+                <Link>
+                  <Button
+                    className="auth"
+                    onClick={() => { setLogged(true) }}
+                  >Sign In</Button>
+                </Link>
+            }
           </div>
         </Toolbar>
       </AppBar>
