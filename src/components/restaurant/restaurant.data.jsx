@@ -46,6 +46,7 @@ const restaurants = [
     price_min: 30,
     price_max: 300,
     rating: 4.3,
+    visited: 1
   },
   {
     id: 2,
@@ -143,6 +144,7 @@ const restaurants = [
     price_min: 30,
     price_max: 400,
     rating: 4,
+    visited: 8
   },
   {
     id: 4,
@@ -191,6 +193,7 @@ const restaurants = [
     price_min: 40,
     price_max: 400,
     rating: 4.1,
+    visited: 2
   },
   {
     id: 5,
@@ -240,6 +243,7 @@ const restaurants = [
     price_min: 140,
     price_max: 600,
     rating: 4.6,
+    visited: 0
   },
 ];
 

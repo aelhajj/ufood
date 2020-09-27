@@ -6,7 +6,7 @@ import CardList from "../../components/card-list/card-list.component";
 class Profile extends React.Component {
   render() {
     const filteredRestaurants = restaurants.filter(
-      (restaurants) => restaurants.id < 4
+      (restaurants) => restaurants.visited > 0
     );
 
     return (
@@ -24,7 +24,7 @@ class Profile extends React.Component {
         </div>
         <div style={{ textAlign: "center" }}>
           <h2>RECENTLY VISITED:</h2>
-          <CardList items={filteredRestaurants} />
+          <CardList visited items={filteredRestaurants} />
         </div>
       </div>
     );

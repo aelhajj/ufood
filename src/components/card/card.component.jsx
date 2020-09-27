@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Rating from "@material-ui/lab/Rating";
+import { Badge } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -18,15 +19,21 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   cardMedia: {
-    paddingTop: "56.25%", 
+    paddingTop: "56.25%",
   },
   cardContent: {
     flexGrow: 1,
   },
-  
+  margin: {
+    margin: theme.spacing(2),
+  },
+  padding: {
+    padding: theme.spacing(0, 2),
+  }
+
 }));
 
-export default function CardResto({ data }) {
+export default function CardResto({ data, visited }) {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -59,6 +66,16 @@ export default function CardResto({ data }) {
             Directions
           </Button>
         </Link>
+        {
+          visited ?
+            <Badge color="error" badgeContent={data.visited} className={classes.margin}>
+              <Button size="small" color="primary" disableRipple style={{ cursor: 'unset' }}>
+                Visited
+              </Button>
+            </Badge>
+            :
+            null
+        }
       </CardActions>
     </Card>
   );
