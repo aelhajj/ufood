@@ -9,7 +9,9 @@ import Chip from "@material-ui/core/Chip";
 
 
 import restaurants from "./restaurant.data";
-import { Grid } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
+import InfoCard from "../info-card/info-card.component";
+import DirectionCard from "../direction-card/direction-card.component";
 
 
 class Restaurant extends React.Component {
@@ -43,71 +45,35 @@ class Restaurant extends React.Component {
     return (
       <div className="homepage">
         <h1>{data.name}</h1>
-        <GoogleMapExample
-          containerElement={
-            <div
-              style={{ height: `300px`, width: "100%", margin: "20px 0px" }}
+        <Grid item xs={6}>
+          {data.genres.map((e, index) => (
+            <Chip
+              label={e}
+              variant="outlined"
+              color="secondary"
+              key={index}
             />
-          }
-          mapElement={<div style={{ height: `100%` }} />}
-        />
-        <Button variant="contained" color="secondary">
-          Get Directions
-        </Button>
-
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <h3>
-              Address : <span className="value">{data.address}</span>
-            </h3>
-          </Grid>
-          <Grid item xs={12}>
-            <Rating
-              name="half-rating-read"
-              value={data.rating}
-              precision={0.1}
-              readOnly
-              size="small"
-            />
-          </Grid>
+          ))}
         </Grid>
-        <Gallery photos={IMAGES} direction={"row"} />
-        <Grid>
-          <Grid item xs={12}>
-            <h4>
-              Phone number : <span className="value">{data.phone} </span>
-            </h4>
-          </Grid>
-          <Grid item xs={6}>
-            <h3>Service hours :</h3>
-            {data.open_hours.map((d, index) => (
-              <h5 key={index} style={{ marginLeft: "10px" }}>
-                {" "}
-                {d.day}: {d.hours}
-              </h5>
-            ))}
-          </Grid>
-          <Grid item xs={6}>
-            <h3>
-              {" "}
-              Price range :{" "}
-              <span className="value">
-                CAD {data.price_min} ~ {data.price_max}
-              </span>
-            </h3>
-          </Grid>
-          <Grid item xs={6}>
-            <h3>Associated types : </h3>
-            {data.genres.map((e, index) => (
-              <Chip
-                label={e}
-                variant="outlined"
-                color="secondary"
-                key={index}
+        <Box mt={2}>
+          <Gallery photos={IMAGES} direction={"row"} />
+        </Box>
+        <Box mt={2}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <InfoCard
+                {...data}
               />
-            ))}
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <DirectionCard
+                {...data}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
+        
+        
       </div>
     );
   }
