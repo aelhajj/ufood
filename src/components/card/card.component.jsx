@@ -42,7 +42,7 @@ export default function CardResto({ data, visited }) {
       <CssBaseline />
       <CardMedia
         className={classes.cardMedia}
-        image={data.photos[0]}
+        image={data.pictures[0]}
         title="Image title"
       />
       <CardContent className={classes.cardContent}>
@@ -71,7 +71,7 @@ export default function CardResto({ data, visited }) {
         {visited ? (
           <Badge
             color="error"
-            badgeContent={data.visited}
+            badgeContent={true}
             className={classes.margin}
           >
             <Button

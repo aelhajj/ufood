@@ -9,10 +9,27 @@ import DirectionCard from "../direction-card/direction-card.component";
 
 import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 
-import restaurants from "./restaurant.data";
+//import restaurants from "./restaurant.data";
 
 class Restaurant extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      restaurants: {},
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://ufoodapi.herokuapp.com/unsecure/restaurants/")
+      .then((res) => res.json())
+      .then((result) => {
+        this.setState({ restaurants: result.items });
+        //console.log(restaurants);
+      });
+  }
   render() {
+    const {restaurants }= this.state;
+    console.log(restaurants);
     const { id, edit } = this.props.match.params;
     const data = restaurants.find((r) => r.id === parseInt(id));
     if (edit === "edit") return <RestaurantEdit data={data} />;
@@ -30,9 +47,9 @@ class Restaurant extends React.Component {
     ));
 
     let IMAGES = [];
-    for (let i = 0; i < data.photos.length; i++) {
+    for (let i = 0; i < data.pictures.length; i++) {
       const temp = {
-        src: data.photos[i],
+        src: data.pictures[i],
         width: 500,
         height: 300,
       };
