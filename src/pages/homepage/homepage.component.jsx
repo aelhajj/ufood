@@ -16,18 +16,21 @@ class Homepage extends React.Component {
       restaurants: [],
       searchField: "",
       genres: [],
-      searchGenres: [],
-      seachRating: [],
+      searchGenre: [],
+      searchRating: [1, 2, 3, 4, 5],
     };
-   // this.handleChange = this.handleChange.bind(this);
   }
 
+  searchGenres = (e, v) => {
+    this.setState({ searchGenre: v });
+  };
+
+  searchRatings = (e, v) => {
+    this.setState({ searchRating: v.map((item) => item.id) });
+  };
 
   handleChange = (e) => {
-   //this.setState({ searchField: e.target.value });
-   const {name, value} = e.target;
-   this.setState({[name]: value});
-   console.log(e.target);
+    this.setState({ searchField: e.target.value });
   };
 
   componentDidMount() {
@@ -36,24 +39,31 @@ class Homepage extends React.Component {
       .then((res) => res.json())
       .then((result) => {
         this.setState({ restaurants: result.items });
-        result.items.map((item) => item.genres.map((it) => genres_tmp.push(it)));
-        //console.log(genres_tmp);
-        this.setState({genres : Array.from(new Set(genres_tmp))});
+        result.items.map((item) =>
+          item.genres.map((it) => genres_tmp.push(it))
+        );
+        this.setState({ genres: Array.from(new Set(genres_tmp)) });
       });
   }
 
   render() {
-    const { restaurants, searchField, genres, seachRating, searchGenres } = this.state;
+    const { restaurants, searchField, genres, searchRating } = this.state;
 
+    console.log(searchRating);
     const filteredRestaurants = restaurants.filter((restaurants) =>
       restaurants.name.toLowerCase().includes(searchField.toLowerCase())
-    );
+    ).filter((restaurants) => searchRating.includes(Math.floor(restaurants.rating)));
 
     return (
       <div className="homepage">
         <div>
-          <SearchBar handleChange={this.handleChange} genres={genres}/>
-          <span>a</span>
+          <SearchBar
+            handleChange={this.handleChange}
+            searchGenres={this.searchGenres}
+            searchRatings={this.searchRatings}
+            genres={genres}
+          />
+          <span>{console.log("a")}</span>
           <CardList items={filteredRestaurants} />
         </div>
       </div>

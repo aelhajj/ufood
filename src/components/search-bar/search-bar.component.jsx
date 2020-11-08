@@ -34,10 +34,10 @@ const ratings = [
   { id: 5, rating: "★★★★★" },
 ];
 
-export default function SearchBar({ handleChange , genres }) {
+export default function SearchBar({ handleChange, genres, searchGenres, searchRatings }) {
   const classes = useStyles();
 
-  if ( genres < 0) {
+  if (genres < 0) {
     genres = types;
   }
 
@@ -58,8 +58,8 @@ export default function SearchBar({ handleChange , genres }) {
           id="multiple-limit-tags"
           options={ratings}
           getOptionLabel={(option) => option.rating}
-          defaultValue={[ratings[5], ratings[4]]}
-          onChange={handleChange}
+          defaultValue={[ratings[5], ratings[4], ratings[3], ratings[2], ratings[1]]}
+          onChange={searchRatings}
           renderInput={(params) => (
             <TextField {...params} variant="outlined" label="Filter Ratings" />
           )}
@@ -72,7 +72,7 @@ export default function SearchBar({ handleChange , genres }) {
           limitTags={2}
           id="multiple-limit-tags"
           options={genres}
-          onChange={handleChange}
+          onChange={searchGenres}
           renderInput={(params) => (
             <TextField {...params} variant="outlined" label="Filter Genres" />
           )}
