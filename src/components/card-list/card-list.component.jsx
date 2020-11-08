@@ -29,7 +29,6 @@ export default function CardList({ items, visited }) {
             <Grid item key={item.name} xs={6} sm={6} md={4}>
               <span>
                 <CardResto data={item} visited={visited} />
-                <span>{console.log(item.name)}</span>
               </span>
             </Grid>
           ))}
