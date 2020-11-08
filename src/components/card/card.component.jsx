@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 
 import Rating from "@material-ui/lab/Rating";
+import VisitModal from "../visit-modal/visit-modal.component";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -68,12 +69,11 @@ export default function CardResto({ data, visited }) {
             Directions
           </Button>
         </Link>
+
+        <VisitModal restaurant={data.name} />
+
         {visited ? (
-          <Badge
-            color="error"
-            badgeContent={true}
-            className={classes.margin}
-          >
+          <Badge color="error" badgeContent={true} className={classes.margin}>
             <Button
               size="small"
               color="primary"
