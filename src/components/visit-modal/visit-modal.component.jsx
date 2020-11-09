@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VisitModal({ restaurant, user}) {
+export default function VisitModal({ restaurant, user, text}) {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -141,7 +141,6 @@ export default function VisitModal({ restaurant, user}) {
         />{" "}
         <Button
           type="submit"
-          fullWidth
           variant="contained"
           color="primary"
           className={classes.submit}
@@ -155,7 +154,7 @@ export default function VisitModal({ restaurant, user}) {
   return (
     <div>
       <Button size="small" onClick={handleOpen} color="primary">
-        Open Modal
+        {text}
       </Button>
 
       <Modal
