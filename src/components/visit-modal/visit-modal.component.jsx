@@ -46,12 +46,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VisitModal({ restaurant }) {
+export default function VisitModal({ restaurant, user}) {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(0);
+  // userId hardcoder pour l'instant ...
+  const userId = "5fa8b39f1a4e510004217bdd";
+  // userToken hardcoder pour l'instant...
+  const userToken =
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ZmE4YjM5ZjFhNGU1MTAwMDQyMTdiZGQiLCJleHAiOjE2MDQ5NzgwMDM5Njh9.fPlvmrb5rclnxTVFW9iIYUPggGGxscr239TIXbIXiBM";
+  
+  const URL_BASE = `https://ufoodapi.herokuapp.com/users/${userId}/restaurants/visits`;
+  //console.log(restaurant.id)
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -63,10 +72,27 @@ export default function VisitModal({ restaurant }) {
     setOpen(false);
   };
 
+  const submitComment = (event) => {
+    event.preventDefault();
+    const response = fetch(URL_BASE, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": userToken,
+      },
+      body: JSON.stringify({
+        restaurant_id: restaurant.id,
+        comment: comment,
+        rating: rating,
+        date: selectedDate,
+      }),
+    }).then((resp) => console.log(resp.json()));
+  }
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Write comment for {restaurant} </h2>
-      <form className={classes.form} onSubmit={console.log("sub")}>
+      <h2 id="simple-modal-title">Write comment for {restaurant.name} </h2>
+      <form className={classes.form} onSubmit={submitComment}>
         <Autocomplete
           className={classes.form}
           id="size-small-filled"
@@ -74,7 +100,7 @@ export default function VisitModal({ restaurant }) {
           required
           options={ratings}
           getOptionLabel={(option) => option.rating}
-          onChange={(e, v) => console.log(v)}
+          onChange={(e, v) => setRating(v.id)}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -94,7 +120,7 @@ export default function VisitModal({ restaurant }) {
             id="date-picker-inline"
             label="Date picker inline"
             value={selectedDate}
-            onChange={handleDateChange}
+            onChange={e => setSelectedDate(e)}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -109,7 +135,7 @@ export default function VisitModal({ restaurant }) {
           defaultValue="Write comment here..."
           variant="outlined"
           margin="normal"
-          onChange={(e, v) => console.log(v)}
+          onChange={(e) => setComment(e.target.value)}
           name="comment"
           required
         />{" "}

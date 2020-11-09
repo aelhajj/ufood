@@ -70,7 +70,7 @@ export default function CardResto({ data, visited }) {
           </Button>
         </Link>
 
-        <VisitModal restaurant={data.name} />
+        <VisitModal restaurant={data} />
 
         {visited ? (
           <Badge color="error" badgeContent={true} className={classes.margin}>
