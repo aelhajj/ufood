@@ -49,7 +49,7 @@ class Homepage extends React.Component {
   render() {
     const { restaurants, searchField, genres, searchRating } = this.state;
 
-    console.log(searchRating);
+    //console.log(searchRating);
     const filteredRestaurants = restaurants
       .filter((restaurants) =>
         restaurants.name.toLowerCase().includes(searchField.toLowerCase())
@@ -67,7 +67,6 @@ class Homepage extends React.Component {
             searchRatings={this.searchRatings}
             genres={genres}
           />
-          <span>{console.log(filteredRestaurants[0])}</span>
           <CardList items={filteredRestaurants} />
           
         </div>

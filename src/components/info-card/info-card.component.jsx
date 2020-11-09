@@ -17,8 +17,8 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 
 export default class InfoCard extends Component {
   render() {
-    const { rating, phone, price_max, price_min, open_hours } = this.props;
-
+    const { rating, tel, price_range, opening_hours } = this.props;
+  //  console.log(opening_hours);
     return (
       <Card>
         <CardContent>
@@ -41,13 +41,13 @@ export default class InfoCard extends Component {
           <Box mt={1}>
             <Typography variant="body1" className="aligned-box">
               <PhoneIcon className="icon" aria-label="phone number" />
-              Phone Number: {phone}
+              Phone Number: {tel}
             </Typography>
           </Box>
           <Box mt={1}>
             <Typography variant="body1" className="aligned-box">
               <AttachMoneyIcon className="icon" aria-label="price range" />
-              Price Range: CAD {price_min} ~ {price_max}
+              Price Range Rank: {price_range}
             </Typography>
           </Box>
           <Box mt={1}>
@@ -56,9 +56,9 @@ export default class InfoCard extends Component {
               Service Hours
             </Typography>
             <List>
-              {open_hours.map((d, index) => (
-                <ListItem key={index}>
-                  {d.day}: {d.hours}
+              {Object.keys(opening_hours).map((d, index) => (
+                <ListItem key={d}>
+                  {d}: {opening_hours[d]}
                 </ListItem>
               ))}
             </List>

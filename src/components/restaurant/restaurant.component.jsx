@@ -7,7 +7,7 @@ import { Grid, Box } from "@material-ui/core";
 import InfoCard from "../info-card/info-card.component";
 import DirectionCard from "../direction-card/direction-card.component";
 
-import { withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withGoogleMap, GoogleMap, Marker, Map } from "react-google-maps";
 
 //import restaurants from "./restaurant.data";
 
@@ -15,24 +15,28 @@ class Restaurant extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurants: {},
+      restaurant: []
     };
   }
 
   componentDidMount() {
-    fetch("https://ufoodapi.herokuapp.com/unsecure/restaurants/")
+    const { id } = this.props.match.params;
+    fetch(`https://ufoodapi.herokuapp.com/unsecure/restaurants/${id}`)
       .then((res) => res.json())
       .then((result) => {
-        this.setState({ restaurants: result.items });
-        //console.log(restaurants);
+        this.setState({ restaurant: result });
       });
   }
+
   render() {
-    const {restaurants }= this.state;
-    console.log(restaurants);
+    const google = window.google;
+    const { restaurant } = this.state;
     const { id, edit } = this.props.match.params;
-    const data = restaurants.find((r) => r.id === parseInt(id));
-    if (edit === "edit") return <RestaurantEdit data={data} />;
+    if (edit === "edit") return <RestaurantEdit data={restaurant} />;
+
+    if (restaurant.length === 0) {
+      return null;
+    }
 
     const {
       withScriptjs,
@@ -40,39 +44,51 @@ class Restaurant extends React.Component {
       GoogleMap,
     } = require("react-google-maps");
 
+    const coords = new google.maps.LatLng(
+      restaurant.location.coordinates[0],
+      restaurant.location.coordinates[1]
+    );
+
     const GoogleMapExample = withGoogleMap((props) => (
-      <GoogleMap defaultCenter={data.location} defaultZoom={17}>
-        <Marker position={data.location} />
+      <GoogleMap defaultCenter={coords} defaultZoom={17}>
+        <Marker position={coords} />
       </GoogleMap>
     ));
 
     let IMAGES = [];
-    for (let i = 0; i < data.pictures.length; i++) {
+    for (let i = 0; i < restaurant.pictures.length; i++) {
       const temp = {
-        src: data.pictures[i],
+        src: restaurant.pictures[i],
         width: 500,
         height: 300,
       };
       IMAGES.push(temp);
     }
+
     return (
       <div className="homepage">
-        <h1>{data.name}</h1>
+        <h1>{restaurant.name}</h1>
         <Grid item xs={6}>
-          {data.genres.map((e, index) => (
-            <Chip label={e} variant="outlined" color="secondary" key={index} />
+          {restaurant.genres.map((index) => (
+            <Chip
+              label={index}
+              variant="outlined"
+              color="secondary"
+              key={index}
+            />
           ))}
         </Grid>
         <Box mt={2}>
+          {" "}
           <Gallery photos={IMAGES} direction={"row"} />
         </Box>
         <Box mt={2}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-              <InfoCard {...data} />
+              <InfoCard {...restaurant} />
             </Grid>
             <Grid item xs={12} md={6}>
-              <DirectionCard {...data} />
+              <DirectionCard {...restaurant} />
             </Grid>
           </Grid>
         </Box>
