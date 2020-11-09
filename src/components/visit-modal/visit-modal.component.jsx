@@ -110,7 +110,6 @@ export default function VisitModal({ restaurant }) {
           variant="outlined"
           margin="normal"
           onChange={(e, v) => console.log(v)}
-          id="comment"
           name="comment"
           required
         />{" "}

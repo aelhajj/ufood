@@ -3,10 +3,8 @@ import React from "react";
 import "./homepage.styles.css";
 
 import CardList from "../../components/card-list/card-list.component";
-//import restaurants from "../../components/restaurant/restaurant.data";
 import SearchBar from "../../components/search-bar/search-bar.component";
 
-//import * as api from '../../services/api';
 
 class Homepage extends React.Component {
   constructor() {
@@ -48,8 +46,6 @@ class Homepage extends React.Component {
 
   render() {
     const { restaurants, searchField, genres, searchRating } = this.state;
-
-    //console.log(searchRating);
     const filteredRestaurants = restaurants
       .filter((restaurants) =>
         restaurants.name.toLowerCase().includes(searchField.toLowerCase())
@@ -57,7 +53,7 @@ class Homepage extends React.Component {
       .filter((restaurants) =>
         searchRating.includes(Math.floor(restaurants.rating))
       );
-    //
+    
     return (
       <div className="homepage">
         <div>

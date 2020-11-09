@@ -1,21 +1,17 @@
 import React from "react";
 
 import Gallery from "react-photo-gallery";
-import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
+//import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
 import Chip from "@material-ui/core/Chip";
 import { Grid, Box } from "@material-ui/core";
 import InfoCard from "../info-card/info-card.component";
 import DirectionCard from "../direction-card/direction-card.component";
 
-import { withGoogleMap, GoogleMap, Marker, Map } from "react-google-maps";
-
-//import restaurants from "./restaurant.data";
-
 class Restaurant extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurant: []
+      restaurant: [],
     };
   }
 
@@ -29,34 +25,16 @@ class Restaurant extends React.Component {
   }
 
   render() {
-    const google = window.google;
     const { restaurant } = this.state;
-    const { id, edit } = this.props.match.params;
-    if (edit === "edit") return <RestaurantEdit data={restaurant} />;
+   // const { id, edit } = this.props.match.params;
+   // if (edit === "edit") return <RestaurantEdit data={restaurant} />;
 
     if (restaurant.length === 0) {
       return null;
     }
 
-    const {
-      withScriptjs,
-      withGoogleMap,
-      GoogleMap,
-    } = require("react-google-maps");
-
-    const coords = new google.maps.LatLng(
-      restaurant.location.coordinates[0],
-      restaurant.location.coordinates[1]
-    );
-
-    const GoogleMapExample = withGoogleMap((props) => (
-      <GoogleMap defaultCenter={coords} defaultZoom={17}>
-        <Marker position={coords} />
-      </GoogleMap>
-    ));
-
     let IMAGES = [];
-    for (let i = 0; i < restaurant.pictures.length; i++) {
+    for (let i = 0; i < restaurant.pictures.length && i < 5; i++) {
       const temp = {
         src: restaurant.pictures[i],
         width: 500,

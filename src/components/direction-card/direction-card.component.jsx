@@ -6,10 +6,15 @@ import RoomIcon from "@material-ui/icons/Room";
 
 export default class DirectionCard extends Component {
   render() {
+    const google = window.google;
     const { location, address } = this.props;
+    const coords = new google.maps.LatLng(
+      location.coordinates[1],
+      location.coordinates[0]
+    );
     const GoogleMapExample = withGoogleMap((props) => (
-      <GoogleMap defaultCenter={location} defaultZoom={17}>
-        <Marker position={location} />
+      <GoogleMap defaultCenter={coords} defaultZoom={17}>
+        <Marker position={coords} />
       </GoogleMap>
     ));
 
