@@ -3,13 +3,19 @@ import React from "react";
 import Gallery from "react-photo-gallery";
 //import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
 import Chip from "@material-ui/core/Chip";
-import { Grid, Box, Button } from "@material-ui/core";
+import { Grid, Box, Button, TextField } from "@material-ui/core";
 import InfoCard from "../info-card/info-card.component";
 import DirectionCard from "../direction-card/direction-card.component";
 import VisitModal from "../visit-modal/visit-modal.component";
 import { withStyles } from "@material-ui/styles";
-
+import PropTypes from "prop-types";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 const styles = (theme) => ({
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
   container: {
     display: "grid",
     gridTemplateColumns: "repeat(12, 1fr)",
@@ -42,6 +48,7 @@ class Restaurant extends React.Component {
 
   render() {
     const { restaurant } = this.state;
+    const { classes } = this.props;
     // const { id, edit } = this.props.match.params;
     // if (edit === "edit") return <RestaurantEdit data={restaurant} />;
 
@@ -67,16 +74,33 @@ class Restaurant extends React.Component {
           justify="flex-start"
           alignItems="center"
         >
-          <Grid item xs={4}>
+          <Grid item xs={12}>
             <h1>{restaurant.name}</h1>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12}>
             <VisitModal restaurant={restaurant} text="Mark Visited" />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6} button>
             <Button size="small" color="secondary">
               Add to favorites
             </Button>
+            <Grid item xs={6} button>
+              <Autocomplete
+                className={classes.paper}
+                multiple
+                size="small"
+                limitTags={2}
+                id="multiple-limit-tags"
+                options={["a"]}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Choose lists"
+                  />
+                )}
+              />
+            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={6}>
@@ -108,5 +132,9 @@ class Restaurant extends React.Component {
     );
   }
 }
+
+Restaurant.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(Restaurant);
