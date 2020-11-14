@@ -3,13 +3,18 @@ import React from "react";
 import Gallery from "react-photo-gallery";
 //import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
 import Chip from "@material-ui/core/Chip";
-import { Grid, Box, Button, TextField } from "@material-ui/core";
+import { Grid, Box, Button, TextField, LinearProgress, Typography } from "@material-ui/core";
 import InfoCard from "../info-card/info-card.component";
 import DirectionCard from "../direction-card/direction-card.component";
 import VisitModal from "../visit-modal/visit-modal.component";
+import FavoriteModal from "../favorite-modal/favorite-modal.component";
+
 import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
+import { api } from "../../services/api";
 const styles = (theme) => ({
   paper: {
     padding: theme.spacing(1),
@@ -33,27 +38,29 @@ class Restaurant extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       restaurant: [],
     };
   }
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    fetch(`https://ufoodapi.herokuapp.com/unsecure/restaurants/${id}`)
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({ restaurant: result });
-      });
+    api.getRestaurantByID(id)
+    .then((result) => {
+      this.setState({ restaurant: result, loading: false });
+    });
   }
 
   render() {
-    const { restaurant } = this.state;
+    const { restaurant, loading } = this.state;
     const { classes } = this.props;
-    // const { id, edit } = this.props.match.params;
-    // if (edit === "edit") return <RestaurantEdit data={restaurant} />;
 
-    if (restaurant.length === 0) {
-      return null;
+    if (loading) {
+      return (
+        <div class="homepage">
+          <LinearProgress/>
+        </div>
+      )
     }
 
     let IMAGES = [];
@@ -77,30 +84,11 @@ class Restaurant extends React.Component {
           <Grid item xs={12}>
             <h1>{restaurant.name}</h1>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <VisitModal restaurant={restaurant} text="Mark Visited" />
           </Grid>
-          <Grid item xs={6} button>
-            <Button size="small" color="secondary">
-              Add to favorites
-            </Button>
-            <Grid item xs={6} button>
-              <Autocomplete
-                className={classes.paper}
-                multiple
-                size="small"
-                limitTags={2}
-                id="multiple-limit-tags"
-                options={["a"]}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    label="Choose lists"
-                  />
-                )}
-              />
-            </Grid>
+          <Grid item xs={6}>
+            <FavoriteModal restaurant={restaurant} text="Add to favorites" />
           </Grid>
         </Grid>
         <Grid item xs={6}>

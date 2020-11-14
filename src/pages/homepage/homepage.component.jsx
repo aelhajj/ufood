@@ -4,6 +4,7 @@ import "./homepage.styles.css";
 
 import CardList from "../../components/card-list/card-list.component";
 import SearchBar from "../../components/search-bar/search-bar.component";
+import { api } from "../../services/api";
 
 
 class Homepage extends React.Component {
@@ -33,15 +34,14 @@ class Homepage extends React.Component {
 
   componentDidMount() {
     const genres_tmp = [];
-    fetch("https://ufoodapi.herokuapp.com/unsecure/restaurants/")
-      .then((res) => res.json())
-      .then((result) => {
-        this.setState({ restaurants: result.items });
-        result.items.map((item) =>
-          item.genres.map((it) => genres_tmp.push(it))
-        );
-        this.setState({ genres: Array.from(new Set(genres_tmp)) });
-      });
+    api.getRestaurants()
+    .then((result) => {
+      this.setState({ restaurants: result.items });
+      result.items.map((item) =>
+        item.genres.map((it) => genres_tmp.push(it))
+      );
+      this.setState({ genres: Array.from(new Set(genres_tmp)) });
+    })
   }
 
   render() {
@@ -64,7 +64,6 @@ class Homepage extends React.Component {
             genres={genres}
           />
           <CardList items={filteredRestaurants} />
-          
         </div>
       </div>
     );
