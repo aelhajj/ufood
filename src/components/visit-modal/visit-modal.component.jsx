@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, makeStyles, Snackbar } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+import { Alert } from '@material-ui/lab';
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -48,23 +48,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function VisitModal({ restaurant, user, text }) {
+export default function VisitModal({ restaurant, user, text}) {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [rating, setRating] = useState(0);
   // userId hardcoder pour l'instant ...
   const userId = "5fa8b39f1a4e510004217bdd";
   // userToken hardcoder pour l'instant...
   const userToken =
     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ZmE4YjM5ZjFhNGU1MTAwMDQyMTdiZGQiLCJleHAiOjE2MDQ5NzgwMDM5Njh9.fPlvmrb5rclnxTVFW9iIYUPggGGxscr239TIXbIXiBM";
-
+  
   const URL_BASE = `https://ufoodapi.herokuapp.com/users/${userId}/restaurants/visits`;
   //console.log(restaurant.id)
-
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
   const handleOpen = () => {
     setOpen(true);
   };
@@ -75,18 +77,17 @@ export default function VisitModal({ restaurant, user, text }) {
 
   const submitComment = (event) => {
     event.preventDefault();
-    api
-      .visitRestaurant({
-        restaurant_id: restaurant.id,
-        comment: comment,
-        rating: rating,
-        date: selectedDate,
-      })
-      .then(() => {
-        setOpen(false);
-        setShowAlert(true);
-      });
-  };
+    api.visitRestaurant({
+      restaurant_id: restaurant.id,
+      comment: comment,
+      rating: rating,
+      date: selectedDate,
+    })
+    .then(() => {
+      setOpen(false);
+      setShowAlert(true);
+    });
+  }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -111,7 +112,6 @@ export default function VisitModal({ restaurant, user, text }) {
         />
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
-            required
             className={classes.form}
             disableToolbar
             variant="inline"
@@ -120,7 +120,7 @@ export default function VisitModal({ restaurant, user, text }) {
             id="date-picker-inline"
             label="Date picker inline"
             value={selectedDate}
-            onChange={(e) => setSelectedDate(e)}
+            onChange={e => setSelectedDate(e)}
             KeyboardButtonProps={{
               "aria-label": "change date",
             }}
@@ -156,15 +156,17 @@ export default function VisitModal({ restaurant, user, text }) {
     <div>
       <Snackbar
         anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
+          vertical: 'bottom',
+          horizontal: 'left',
         }}
         open={showAlert}
         onClose={() => setShowAlert(false)}
         autoHideDuration={3000}
         message="Note archived"
       >
-        <Alert severity="success">Restaurant Added to Visited</Alert>
+        <Alert severity="success">
+          Restaurant Added to Visited
+        </Alert>
       </Snackbar>
       <Button size="small" onClick={handleOpen} color="primary">
         {text}

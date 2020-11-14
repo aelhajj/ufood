@@ -49,4 +49,21 @@ export const api = new class Api {
         .then(res => res.json());
     }
 
+    getRestaurantVisit(idRestaurant) {
+        const idUser = user.getIdUser();
+        const auth = user.getAuthToken();
+        return fetch(
+          `${this.baseUrl}/users/${idUser}/restaurants/${idRestaurant}/visits?limit=3`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: auth,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((res) => Promise.resolve(res.items));
+    }
+
 }

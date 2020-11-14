@@ -8,6 +8,7 @@ import InfoCard from "../info-card/info-card.component";
 import DirectionCard from "../direction-card/direction-card.component";
 import VisitModal from "../visit-modal/visit-modal.component";
 import FavoriteModal from "../favorite-modal/favorite-modal.component";
+import ViewVisitModal from "../view-visit-modal/view-visit-modal.component";
 
 import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
@@ -79,14 +80,26 @@ class Restaurant extends React.Component {
           justify="flex-start"
           alignItems="center"
         >
-          <Grid item xs={12}>
+          <Grid item xs={4}>
             <h1>{restaurant.name}</h1>
           </Grid>
-          <Grid item xs={6}>
-            <VisitModal restaurant={restaurant} text="Mark Visited" />
-          </Grid>
-          <Grid item xs={6}>
-            <FavoriteModal restaurant={restaurant} text="Add to favorites" />
+          <Grid
+            item
+            xs={8}
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
+            <Grid item xs={3}>
+              <VisitModal restaurant={restaurant} text="Mark Visited" />
+            </Grid>
+            <Grid item xs={3}>
+              <FavoriteModal restaurant={restaurant} text="Add to favorites" />
+            </Grid>
+            <Grid item xs={2}>
+              <ViewVisitModal restaurant={restaurant} text="View visits" />
+            </Grid>
           </Grid>
         </Grid>
         <Grid item xs={6}>
