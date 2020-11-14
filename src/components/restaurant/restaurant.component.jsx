@@ -3,7 +3,7 @@ import React from "react";
 import Gallery from "react-photo-gallery";
 //import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
 import Chip from "@material-ui/core/Chip";
-import { Grid, Box, Button, TextField, LinearProgress, Typography } from "@material-ui/core";
+import { Grid, Box, LinearProgress } from "@material-ui/core";
 import InfoCard from "../info-card/info-card.component";
 import DirectionCard from "../direction-card/direction-card.component";
 import VisitModal from "../visit-modal/visit-modal.component";
@@ -11,8 +11,6 @@ import FavoriteModal from "../favorite-modal/favorite-modal.component";
 
 import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 import { api } from "../../services/api";
 const styles = (theme) => ({

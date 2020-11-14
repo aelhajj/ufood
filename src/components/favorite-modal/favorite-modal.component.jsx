@@ -1,24 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, makeStyles, Snackbar } from "@material-ui/core";
-import { Alert } from '@material-ui/lab';
+import { Alert } from "@material-ui/lab";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 import { api } from "../../services/api";
-
-const ratings = [
-  { id: 0, rating: "☆☆☆☆☆" },
-  { id: 1, rating: "★☆☆☆☆" },
-  { id: 2, rating: "★★☆☆☆" },
-  { id: 3, rating: "★★★☆☆" },
-  { id: 4, rating: "★★★★☆" },
-  { id: 5, rating: "★★★★★" },
-];
 
 function getModalStyle() {
   const top = 50;
@@ -55,9 +41,6 @@ export default function FavoriteModal({ restaurant, user, text }) {
   const [showAlert, setShowAlert] = useState(false);
   const [options, setOptions] = useState([]);
   const loading = open && options.length === 0;
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [comment, setComment] = useState('');
-  const [rating, setRating] = useState(0);
   const [chosenList, setChosenList] = useState({});
   // userId hardcoder pour l'instant ...
   const userId = "5fa8b39f1a4e510004217bdd";
@@ -67,9 +50,7 @@ export default function FavoriteModal({ restaurant, user, text }) {
 
   const URL_BASE = `https://ufoodapi.herokuapp.com/users/${userId}/restaurants/visits`;
   //console.log(restaurant.id)
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -79,13 +60,13 @@ export default function FavoriteModal({ restaurant, user, text }) {
   };
 
   useEffect(() => {
-    api.getFavoritesLists()
-    .then((list) => {
-      const favorites = []
+    api.getFavoritesLists().then((list) => {
+      const favorites = [];
       for (const item of list) {
-        if (!item.name) // /!\ Some Lists have no Name /!\
-          item.name = '(Anonymous List)'
-        favorites.push(item.name)
+        if (!item.name)
+          // /!\ Some Lists have no Name /!\
+          item.name = "(Anonymous List)";
+        favorites.push(item.name);
       }
       setOptions(list);
     });
@@ -93,8 +74,7 @@ export default function FavoriteModal({ restaurant, user, text }) {
 
   const submitComment = (event) => {
     event.preventDefault();
-    api.addToFavorite(chosenList.id, restaurant.id)
-    .then(() => {
+    api.addToFavorite(chosenList.id, restaurant.id).then(() => {
       setShowAlert(true);
       setOpen(false);
     });
@@ -111,16 +91,16 @@ export default function FavoriteModal({ restaurant, user, text }) {
           id="multiple-limit-tags"
           options={options}
           onChange={(e, v) => {
-            if (!e || !v)
-              return;
+            if (!e || !v) return;
             setChosenList(v);
           }}
-          getOptionLabel={(option) => option.name || '(Anonymous List)'}
+          getOptionLabel={(option) => option.name || "(Anonymous List)"}
           renderInput={(params) => (
             <TextField
               {...params}
               variant="outlined"
               label="Choose list"
+              required
             />
           )}
         />
@@ -140,17 +120,15 @@ export default function FavoriteModal({ restaurant, user, text }) {
     <div>
       <Snackbar
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: "bottom",
+          horizontal: "left",
         }}
         open={showAlert}
         onClose={() => setShowAlert(false)}
         autoHideDuration={3000}
         message="Note archived"
       >
-        <Alert severity="success">
-          Restaurant Added to Favorties
-        </Alert>
+        <Alert severity="success">Restaurant Added to Favorties</Alert>
       </Snackbar>
       <Button size="small" onClick={handleOpen} color="primary">
         {text}
