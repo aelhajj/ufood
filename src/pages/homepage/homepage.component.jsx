@@ -5,7 +5,6 @@ import "./homepage.styles.css";
 import CardList from "../../components/card-list/card-list.component";
 import SearchBar from "../../components/search-bar/search-bar.component";
 
-
 class Homepage extends React.Component {
   constructor() {
     super();
@@ -41,19 +40,34 @@ class Homepage extends React.Component {
           item.genres.map((it) => genres_tmp.push(it))
         );
         this.setState({ genres: Array.from(new Set(genres_tmp)) });
+        this.setState({ searchGenre: this.state.genres });
       });
   }
 
   render() {
-    const { restaurants, searchField, genres, searchRating } = this.state;
+    const { restaurants, searchField, genres } = this.state;
+
+    var { searchGenre, searchRating } = this.state;
+
+    if (searchGenre.length === 0) {
+      searchGenre = genres;
+    }
+
+    if (searchRating.length === 0) {
+      searchRating = [1, 2, 3, 4, 5];
+    }
+
     const filteredRestaurants = restaurants
       .filter((restaurants) =>
         restaurants.name.toLowerCase().includes(searchField.toLowerCase())
       )
       .filter((restaurants) =>
-        searchRating.includes(Math.floor(restaurants.rating))
+        searchRating.includes(Math.ceil(restaurants.rating))
+      )
+      .filter((restaurants) =>
+        restaurants.genres.some((genre) => searchGenre.includes(genre))
       );
-    
+
     return (
       <div className="homepage">
         <div>
@@ -64,7 +78,6 @@ class Homepage extends React.Component {
             genres={genres}
           />
           <CardList items={filteredRestaurants} />
-          
         </div>
       </div>
     );

@@ -66,7 +66,7 @@ export default function VisitModal({ restaurant }) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Write comment for {restaurant} </h2>
-      <form className={classes.form} onSubmit={console.log("sub")}>
+      <form className={classes.form} >
         <Autocomplete
           className={classes.form}
           id="size-small-filled"

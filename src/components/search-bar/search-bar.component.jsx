@@ -16,15 +16,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const types = [
-  { id: 0, type: "Mexican" },
-  { id: 1, type: "Fastfood" },
-  { id: 2, type: "Italian" },
-  { id: 3, type: "Coffee" },
-  { id: 4, type: "Thai" },
-  { id: 5, type: "Lebanese" },
-];
-
 const ratings = [
   { id: 0, rating: "☆☆☆☆☆" },
   { id: 1, rating: "★☆☆☆☆" },
@@ -36,10 +27,6 @@ const ratings = [
 
 export default function SearchBar({ handleChange, genres, searchGenres, searchRatings }) {
   const classes = useStyles();
-
-  if (genres < 0) {
-    genres = types;
-  }
 
   return (
     <Grid container className={classes.paper} spacing={3}>
@@ -58,7 +45,6 @@ export default function SearchBar({ handleChange, genres, searchGenres, searchRa
           id="multiple-limit-tags"
           options={ratings}
           getOptionLabel={(option) => option.rating}
-          defaultValue={[ratings[5], ratings[4], ratings[3], ratings[2], ratings[1]]}
           onChange={searchRatings}
           renderInput={(params) => (
             <TextField {...params} variant="outlined" label="Filter Ratings" />
@@ -72,6 +58,7 @@ export default function SearchBar({ handleChange, genres, searchGenres, searchRa
           limitTags={2}
           id="multiple-limit-tags"
           options={genres}
+          getOptionLabel={(option) => option }
           onChange={searchGenres}
           renderInput={(params) => (
             <TextField {...params} variant="outlined" label="Filter Genres" />
