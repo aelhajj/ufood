@@ -53,7 +53,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/restaurant/:id/:edit" component={Restaurant} />
-            <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path="/profile/" component={Profile} />
           </Switch>
         </main>
       </MuiThemeProvider>
