@@ -12,12 +12,15 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-
 import Rating from "@material-ui/lab/Rating";
+
 import VisitModal from "../visit-modal/visit-modal.component";
+import ViewVisitModal from "../view-visit-modal/view-visit-modal.component";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   card: {
+    position: "relative",
     display: "flex",
     height: "100%",
     flexDirection: "column",
@@ -34,12 +37,28 @@ const useStyles = makeStyles((theme) => ({
   padding: {
     padding: theme.spacing(0, 2),
   },
+  removeIcon: {
+    position: "absolute",
+    right: "5px",
+    top: "5px",
+    color: "white",
+  },
 }));
 
-export default function CardResto({ data, visited }) {
+export default function CardResto({ data, visited, deleteCard }) {
   const classes = useStyles();
+  if (data.length === 0) {
+    return <span>No restaurant</span>;
+  }
   return (
     <Card className={classes.card}>
+      {deleteCard ? (
+        <CloseIcon
+          onClick={() => deleteCard(data.id)}
+          className={classes.removeIcon}
+        />
+      ) : null}
+
       <CssBaseline />
       <CardMedia
         className={classes.cardMedia}
@@ -70,20 +89,15 @@ export default function CardResto({ data, visited }) {
           </Button>
         </Link>
 
-        <VisitModal restaurant={data.name} />
-
         {visited ? (
-          <Badge color="error" badgeContent={true} className={classes.margin}>
-            <Button
-              size="small"
-              color="primary"
-              disableRipple
-              style={{ cursor: "unset" }}
-            >
-              Visited
-            </Button>
-          </Badge>
-        ) : null}
+          <ViewVisitModal
+            restaurant={data}
+            text="View Rating"
+            visited={visited}
+          />
+        ) : (
+          <VisitModal restaurant={data} text="Rate" visited={visited} />
+        )}
       </CardActions>
     </Card>
   );

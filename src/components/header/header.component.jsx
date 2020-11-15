@@ -85,7 +85,7 @@ export default function Header() {
             </div>
             {logged ? (
               <div style={{ cursor: "pointer" }}>
-                <Link className="review-link" to={`/profile/Iroh`}>
+                <Link className="review-link" to={`/profile/`}>
                   <Avatar
                     alt="avatar"
                     src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}

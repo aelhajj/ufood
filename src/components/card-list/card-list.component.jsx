@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CardList({ items, visited }) {
+export default function CardList({ items, visited, deleteCard }) {
   const classes = useStyles();
   if (items.length > 0) {
     return (
@@ -23,7 +23,11 @@ export default function CardList({ items, visited }) {
           {items.map((item) => (
             <Grid item key={item.name} xs={6} sm={6} md={4}>
               <span>
-                <CardResto data={item} visited={visited} />
+                <CardResto
+                  data={item}
+                  visited={visited}
+                  deleteCard={deleteCard}
+                />
               </span>
             </Grid>
           ))}
