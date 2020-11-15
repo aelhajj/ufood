@@ -86,8 +86,8 @@ export default function ViewVisitModal({ restaurant, user, text }) {
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Visits of {restaurant.name}</h2>
       <List className={classes.list}>
-        {visits.map((visit) => (
-          <ListItem>
+        {visits.map((visit, index) => (
+          <ListItem key={index}>
             <Paper elevation={1} className={classes.listItem}>
               <Typography gutterBottom variant="body1">
                 {visit.date}

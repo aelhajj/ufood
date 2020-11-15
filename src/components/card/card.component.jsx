@@ -16,9 +16,11 @@ import {
 import Rating from "@material-ui/lab/Rating";
 import VisitModal from "../visit-modal/visit-modal.component";
 import ViewVisitModal from '../view-visit-modal/view-visit-modal.component';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   card: {
+    position: 'relative',
     display: "flex",
     height: "100%",
     flexDirection: "column",
@@ -35,9 +37,15 @@ const useStyles = makeStyles((theme) => ({
   padding: {
     padding: theme.spacing(0, 2),
   },
+  removeIcon: {
+    position: 'absolute',
+    right: '5px',
+    top: '5px',
+    color: 'white'
+  }
 }));
 
-export default function CardResto({ data, visited }) {
+export default function CardResto({ data, visited, deleteCard }) {
   const classes = useStyles();
   if(data.length === 0 ) {
     return (
@@ -46,6 +54,10 @@ export default function CardResto({ data, visited }) {
   }
   return (
     <Card className={classes.card}>
+      {deleteCard ? (
+        <CloseIcon onClick={() => deleteCard(data.id)} className={classes.removeIcon}/>
+      ) : null }
+
       <CssBaseline />
       <CardMedia
         className={classes.cardMedia}

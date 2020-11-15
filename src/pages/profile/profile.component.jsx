@@ -73,7 +73,8 @@ class Profile extends React.Component {
       tempName: "",
       rowData: [],
       restaurants: [],
-
+      selectedList: null,
+      selectedListIndex: 0,
       visitedRestaurants: [],
     };
   }
@@ -82,7 +83,7 @@ class Profile extends React.Component {
     const createData = (id, name, restaurants) => {
       return { id, name, restaurants };
     };
-    api.getUserFavorites()
+    return api.getUserFavorites()
     .then((restaurants) => {
       const rows = [];
       restaurants.map((item) => {
@@ -93,6 +94,7 @@ class Profile extends React.Component {
         this.setState({ tempName: rows[0].name });
       else
         this.setState({ restaurants: [] });
+      return Promise.resolve();
     })
   };
 
@@ -101,6 +103,7 @@ class Profile extends React.Component {
     this.state.rowData[index].restaurants.map((item) => {
       api.getRestaurantByID(item.id)
       .then((restaurant) => {
+        this.setState({selectedList: this.state.rowData[index].id, selectedListIndex: index});
         this.setState({restaurants: [...this.state.restaurants, restaurant]});
       })
     });
@@ -129,6 +132,19 @@ class Profile extends React.Component {
       this.getUserFavorites();
     });
   };
+
+  deleteCard = (idRestaurant) => {
+    // console.log(this.state);
+    api.removeFromFavorite(this.state.selectedList, idRestaurant)
+    .then(() => {
+      createToast({message: 'Removed Restaurant From List'});
+      this.getUserFavorites()
+      .then(() => {
+        this.viewContent(this.state.selectedListIndex);
+      })
+    })
+    // console.log(idRestaurant);
+  }
 
   componentDidMount() {
     api.getUser().then((result) => {
@@ -234,7 +250,7 @@ class Profile extends React.Component {
             </TableBody>
           </Table>
         </TableContainer>
-        <CardList items={this.state.restaurants} visited={true} />
+        <CardList items={this.state.restaurants} visited={true} deleteCard={this.deleteCard}/>
       </div>
     );
   }

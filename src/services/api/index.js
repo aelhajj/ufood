@@ -143,7 +143,20 @@ export const api = new (class Api {
         "Content-Type": "application/json",
         Authorization: auth,
       },
-    }).then((res) => res.json());
+    })
+    .then((res) => res.json());
+  }
+
+  removeFromFavorite(idList, idRestaurant) {
+    const auth = user.getAuthToken();
+    return fetch(`${this.baseUrl}/favorites/${idList}/restaurants/${idRestaurant}`, {
+        method: "delete",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth,
+        },
+      })
+      .then((res) => res.json());
   }
 
 })();
