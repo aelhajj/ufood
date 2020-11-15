@@ -16,7 +16,7 @@ import {
 import DeleteIcon from "@material-ui/icons/Clear";
 import UpdateIcon from "@material-ui/icons/Update";
 import ViewIcon from "@material-ui/icons/ViewComfy";
-import { createToast } from '../../components/Toast/Toast';
+import { createToast } from "../../components/Toast/Toast";
 import { api } from "../../services/api/index";
 
 const CssTextField = withStyles({
@@ -83,68 +83,64 @@ class Profile extends React.Component {
     const createData = (id, name, restaurants) => {
       return { id, name, restaurants };
     };
-    return api.getUserFavorites()
-    .then((restaurants) => {
+    return api.getUserFavorites().then((restaurants) => {
       const rows = [];
       restaurants.map((item) => {
         rows.push(createData(item.id, item.name, item.restaurants));
       });
       this.setState({ rowData: rows });
-      if (rows.length > 0)
-        this.setState({ tempName: rows[0].name });
-      else
-        this.setState({ restaurants: [] });
+      if (rows.length > 0) this.setState({ tempName: rows[0].name });
+      else this.setState({ restaurants: [] });
       return Promise.resolve();
-    })
+    });
   };
 
   viewContent = (index) => {
+    const resto_id = [];
     this.setState({ restaurants: [] });
-    this.state.rowData[index].restaurants.map((item) => {
-      api.getRestaurantByID(item.id)
-      .then((restaurant) => {
-        this.setState({selectedList: this.state.rowData[index].id, selectedListIndex: index});
-        this.setState({restaurants: [...this.state.restaurants, restaurant]});
-      })
+    this.state.rowData[index].restaurants.map((it) => resto_id.push(it.id));
+    Array.from(new Set(resto_id)).map((item) => {
+      api.getRestaurantByID(item).then((restaurant) => {
+        this.setState({
+          selectedList: this.state.rowData[index].id,
+          selectedListIndex: index,
+        });
+        this.setState({ restaurants: [...this.state.restaurants, restaurant] });
+      });
     });
   };
 
   createFavorite = () => {
-    api.addUserFavorite(this.state.favName)
-    .then(() => {
-      createToast({message: 'Created new Favorite List'});
+    api.addUserFavorite(this.state.favName).then(() => {
+      createToast({ message: "Created new Favorite List" });
       this.getUserFavorites();
     });
   };
 
   deleteFavorite = (id) => {
-    api.deleteUserFavorite(id)
-    .then(() => {
-      createToast({message: 'Deleted List'});
+    api.deleteUserFavorite(id).then(() => {
+      createToast({ message: "Deleted List" });
       this.getUserFavorites();
     });
   };
 
   updateFavorite = (id) => {
-    api.editUserFavorite(id, this.state.tempName)
-    .then(() => {
-      createToast({message: 'Changed List Name'});
+    api.editUserFavorite(id, this.state.tempName).then(() => {
+      createToast({ message: "Changed List Name" });
       this.getUserFavorites();
     });
   };
 
   deleteCard = (idRestaurant) => {
     // console.log(this.state);
-    api.removeFromFavorite(this.state.selectedList, idRestaurant)
-    .then(() => {
-      createToast({message: 'Removed Restaurant From List'});
-      this.getUserFavorites()
-      .then(() => {
+    api.removeFromFavorite(this.state.selectedList, idRestaurant).then(() => {
+      createToast({ message: "Removed Restaurant From List" });
+      this.getUserFavorites().then(() => {
         this.viewContent(this.state.selectedListIndex);
-      })
-    })
+      });
+    });
     // console.log(idRestaurant);
-  }
+  };
 
   componentDidMount() {
     api.getUser().then((result) => {
@@ -250,7 +246,11 @@ class Profile extends React.Component {
             </TableBody>
           </Table>
         </TableContainer>
-        <CardList items={this.state.restaurants} visited={true} deleteCard={this.deleteCard}/>
+        <CardList
+          items={this.state.restaurants}
+          visited={true}
+          deleteCard={this.deleteCard}
+        />
       </div>
     );
   }

@@ -9,8 +9,7 @@ export const api = new (class Api {
 
   getRestaurantByID(id) {
     if (!id) throw new Error("Missing Param");
-    return fetch(`${this.baseUrl}/restaurants/${id}`)
-    .then((res) => res.json());
+    return fetch(`${this.baseUrl}/restaurants/${id}`).then((res) => res.json());
   }
 
   getFavoritesLists() {
@@ -143,21 +142,20 @@ export const api = new (class Api {
         "Content-Type": "application/json",
         Authorization: auth,
       },
-    })
-    .then((res) => res.json());
+    }).then((res) => res.json());
   }
 
   removeFromFavorite(idList, idRestaurant) {
     const auth = user.getAuthToken();
-    return fetch(`${this.baseUrl}/favorites/${idList}/restaurants/${idRestaurant}`, {
+    return fetch(
+      `${this.baseUrl}/favorites/${idList}/restaurants/${idRestaurant}`,
+      {
         method: "delete",
         headers: {
           "Content-Type": "application/json",
           Authorization: auth,
         },
-      })
-      .then((res) => res.json());
+      }
+    ).then((res) => res.json());
   }
-
 })();
-

@@ -1,7 +1,6 @@
 import React from "react";
 
 import Gallery from "react-photo-gallery";
-//import RestaurantEdit from "../restaurant-edit/restaurant-edit.component";
 import Chip from "@material-ui/core/Chip";
 import { Grid, Box, LinearProgress } from "@material-ui/core";
 import InfoCard from "../info-card/info-card.component";
@@ -44,8 +43,7 @@ class Restaurant extends React.Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    api.getRestaurantByID(id)
-    .then((result) => {
+    api.getRestaurantByID(id).then((result) => {
       this.setState({ restaurant: result, loading: false });
     });
   }
@@ -57,9 +55,9 @@ class Restaurant extends React.Component {
     if (loading) {
       return (
         <div class="homepage">
-          <LinearProgress/>
+          <LinearProgress />
         </div>
-      )
+      );
     }
 
     let IMAGES = [];

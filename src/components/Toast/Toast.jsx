@@ -1,14 +1,13 @@
-import React from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
-import { Alert } from '@material-ui/lab';
+import React from "react";
+import Snackbar from "@material-ui/core/Snackbar";
+import { Alert } from "@material-ui/lab";
 
 let _createToast;
 
 class Toat extends React.Component {
-
   state = {
     open: false,
-    message: '',
+    message: "",
   };
 
   componentDidMount() {
@@ -18,7 +17,7 @@ class Toat extends React.Component {
   hideSnack = () => {
     this.setState({
       open: false,
-      message: '',
+      message: "",
     });
   };
 
@@ -28,22 +27,23 @@ class Toat extends React.Component {
 
   render() {
     const message = (
-      <span id="snackbar-message-id" dangerouslySetInnerHTML={{ __html: this.state.message }} />
+      <span
+        id="snackbar-message-id"
+        dangerouslySetInnerHTML={{ __html: this.state.message }}
+      />
     );
 
     return (
       <Snackbar
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: "bottom",
+          horizontal: "left",
         }}
         open={this.state.open}
         onClose={this.hideSnack}
         autoHideDuration={3000}
       >
-        <Alert severity="success">
-          {message}
-        </Alert>
+        <Alert severity="success">{message}</Alert>
       </Snackbar>
     );
   }
