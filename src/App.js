@@ -7,7 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Layout, { Root } from "@mui-treasury/layout";
 
 import { Switch, Route } from "react-router-dom";
-import Toast from './components/Toast/Toast';
+import Toast from "./components/Toast/Toast";
 import Homepage from "./pages/homepage/homepage.component";
 import Restaurant from "./components/restaurant/restaurant.component";
 import Profile from "./pages/profile/profile.component";
@@ -45,7 +45,7 @@ const theme = createMuiTheme({
 function App() {
   return (
     <Root scheme={scheme}>
-      <Toast/>
+      <Toast />
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <HeaderFood />

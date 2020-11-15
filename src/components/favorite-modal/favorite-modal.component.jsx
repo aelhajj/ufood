@@ -40,16 +40,7 @@ export default function FavoriteModal({ restaurant, user, text }) {
   const [open, setOpen] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [options, setOptions] = useState([]);
-  const loading = open && options.length === 0;
   const [chosenList, setChosenList] = useState({});
-  // userId hardcoder pour l'instant ...
-  const userId = "5fa8b39f1a4e510004217bdd";
-  // userToken hardcoder pour l'instant...
-  const userToken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ZmE4YjM5ZjFhNGU1MTAwMDQyMTdiZGQiLCJleHAiOjE2MDQ5NzgwMDM5Njh9.fPlvmrb5rclnxTVFW9iIYUPggGGxscr239TIXbIXiBM";
-
-  const URL_BASE = `https://ufoodapi.herokuapp.com/users/${userId}/restaurants/visits`;
-  //console.log(restaurant.id)
 
   const handleOpen = () => {
     setOpen(true);

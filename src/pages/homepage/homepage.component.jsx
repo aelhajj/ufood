@@ -33,14 +33,11 @@ class Homepage extends React.Component {
 
   componentDidMount() {
     const genres_tmp = [];
-    api.getRestaurants()
-    .then((result) => {
+    api.getRestaurants().then((result) => {
       this.setState({ restaurants: result.items });
-      result.items.map((item) =>
-        item.genres.map((it) => genres_tmp.push(it))
-      );
+      result.items.map((item) => item.genres.map((it) => genres_tmp.push(it)));
       this.setState({ genres: Array.from(new Set(genres_tmp)) });
-    })
+    });
   }
 
   render() {

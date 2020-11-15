@@ -1,43 +1,50 @@
-
 # UFood
-Application Web en React JS pour le cours de GLO-3102.
-L'application permet de consulter de l'information sur diverses restaurants, ainsi que la connexion, l'inscription et la sauvegarde des favoris pour un utilisateur. 
 
-  ## Équipe 17
-  
-  Membres de l'équipe : 
-  
-[**Amanie El-Hajj**](github.com/aelhajj)  
-[**Charles Drapeau**]()
+Application Web en React JS pour le cours de GLO-3102.
+
+L'application permet de consulter de l'information sur diverses restaurants, ainsi que la connexion, l'inscription et la sauvegarde des favoris pour un utilisateur.
+
+## Équipe 17
+
+Membres de l'équipe :
+
+[**Amanie El-Hajj**](github.com/aelhajj)
+
+[**Charles Drapeau**](https://github.com/drapeaucharles)
+
 [**Thibault-Alexandre Faure**](https://github.com/ImOverlord)
 
 ## Prérequis
 
 - Git [Windows](http://www.git-scm.com/book/en/Getting-Started-Installing-Git#Installing-on-Windows), [Mac](http://www.git-scm.com/book/en/Getting-Started-Installing-Git#Installing-on-Mac), [Linux](http://www.git-scm.com/book/en/Getting-Started-Installing-Git#Installing-on-Linux)
 
--  [Node.js](https://nodejs.org/en/) (version LTS recommandée)
-
-  
+- [Node.js](https://nodejs.org/en/) (version LTS recommandée)
 
 Vérifier que Node est installé avec la commande:
 
 ```bash
 
+
+
 node -v
+
+
 
 ```
 
-  
-
 ## Installation
-
-  
 
 ```bash
 
+
+
 # install dependencies
 
+
+
 npm install
+
+
 
 ```
 
@@ -45,40 +52,80 @@ npm install
 
 ```bash
 
+
+
 # serve with hot reload at localhost:8080
+
+
 
 npm run serve
 
+
+
 ```
 
- 
 ## Livrable 1
 
-Le livrable 1 comprend les éléments suivants : 
+Le livrable 1 comprend les éléments suivants :
 
-Pages : 
+### Pages :
 
- - Homepage 
- - Restaurant
- - User
- 
- Components : 
- 
- - Card
- - Card-List
- - Header
- - Restaurant
- - Restaurant-Edit
- - Search-Bar
- - Search-Box
+- Homepage
 
-  
+- Restaurant
 
-## Livrable 2-3
+- User
+
+### Components :
+
+- Card
+
+- Card-List
+
+- Header
+
+- Restaurant
+
+- Restaurant-Edit
+
+- Search-Bar
+
+- Search-Box
+
+## Livrable 2
+
+Le livrable 2 comprend les éléments suivants :
+
+Pages :
+
+- Homepage :
+  Page d'acceuil, contient la liste des restaurants avec possibilité de filtrage.
+
+- Restaurant :
+  /{idResto}
+  Page de restaurant avec les informations, et possibilité d'ajouter aux favoris, commenter, voir sur la map.
+
+- User :
+  /{nameUser}
+  Contient les informations de l'utilisateur connecté, et les listes favoris.
+
+### Components :
+
+Du livrable I : Card, Card-List, Header, Restaurant, Restaurant-Edit, Search-Bar, Search-Box
+
+- VisitModal
+- ViewVisitModal
+- FavoritesModal
+- Toast
+
+### Services :
+
+- API
+- USER (intégration avec API au livrable 3)
+
+## Livrable 3
 
 À venir
-  
-  
 
 ## Notes
 

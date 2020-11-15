@@ -96,7 +96,11 @@ class Restaurant extends React.Component {
               <FavoriteModal restaurant={restaurant} text="Add to favorites" />
             </Grid>
             <Grid item xs={2}>
-              <ViewVisitModal restaurant={restaurant} visited={false} text="View visits" />
+              <ViewVisitModal
+                restaurant={restaurant}
+                visited={false}
+                text="View visits"
+              />
             </Grid>
           </Grid>
         </Grid>
