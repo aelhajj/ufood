@@ -38,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CardResto({ data, visited }) {
   const classes = useStyles();
+  if(data.length === 0 ) {
+    return (
+      <span>No restaurant</span>
+    )
+  }
   return (
     <Card className={classes.card}>
       <CssBaseline />
@@ -70,8 +75,6 @@ export default function CardResto({ data, visited }) {
           </Button>
         </Link>
 
-        <VisitModal restaurant={data} text="Comment" />
-
         {visited ? (
           <Badge color="error" badgeContent={true} className={classes.margin}>
             <Button
@@ -83,7 +86,9 @@ export default function CardResto({ data, visited }) {
               Visited
             </Button>
           </Badge>
-        ) : null}
+        ) : (
+          <VisitModal restaurant={data} text="Comment" />
+        )}
       </CardActions>
     </Card>
   );

@@ -18,7 +18,7 @@ import AccessTimeIcon from "@material-ui/icons/AccessTime";
 export default class InfoCard extends Component {
   render() {
     const { rating, tel, price_range, opening_hours } = this.props;
-    
+  //  console.log(opening_hours);
     return (
       <Card>
         <CardContent>

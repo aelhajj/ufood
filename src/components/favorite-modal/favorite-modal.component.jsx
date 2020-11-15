@@ -60,7 +60,7 @@ export default function FavoriteModal({ restaurant, user, text }) {
   };
 
   useEffect(() => {
-    api.getFavoritesLists().then((list) => {
+    api.getUserFavorites().then((list) => {
       const favorites = [];
       for (const item of list) {
         if (!item.name)

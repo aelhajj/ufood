@@ -1,7 +1,8 @@
 export const user = new class {
 
     getIdUser() {
-        return "5fa8b39f1a4e510004217bdd"
+      //  return "5fa8b39f1a4e510004217bdd"
+      return "5fac0ba5fed821000485521f";
     }
 
     getAuthToken() {
