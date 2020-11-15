@@ -9,7 +9,8 @@ export const api = new (class Api {
 
   getRestaurantByID(id) {
     if (!id) throw new Error("Missing Param");
-    return fetch(`${this.baseUrl}/restaurants/${id}`).then((res) => res.json());
+    return fetch(`${this.baseUrl}/restaurants/${id}`)
+    .then((res) => res.json());
   }
 
   getFavoritesLists() {
@@ -102,8 +103,9 @@ export const api = new (class Api {
       .then((res) => Promise.resolve(res.items));
   }
 
-  addUserFavorite(name, email) {
+  addUserFavorite(name) {
     const auth = user.getAuthToken();
+    const email = user.getEmail();
     return fetch(`${this.baseUrl}/favorites`, {
       method: "post",
       headers: {
@@ -117,9 +119,10 @@ export const api = new (class Api {
     }).then((res) => res.json());
   }
 
-  editUserFavorite(listId, name, email) {
+  editUserFavorite(idList, name) {
     const auth = user.getAuthToken();
-    return fetch(`${this.baseUrl}/favorites/${listId}`, {
+    const email = user.getEmail();
+    return fetch(`${this.baseUrl}/favorites/${idList}`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -132,9 +135,9 @@ export const api = new (class Api {
     }).then((res) => res.json());
   }
 
-  deleteUserFavorite(listId, name, email) {
+  deleteUserFavorite(idList) {
     const auth = user.getAuthToken();
-    return fetch(`${this.baseUrl}/favorites/${listId}`, {
+    return fetch(`${this.baseUrl}/favorites/${idList}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

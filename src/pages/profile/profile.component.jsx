@@ -16,7 +16,7 @@ import {
 import DeleteIcon from "@material-ui/icons/Clear";
 import UpdateIcon from "@material-ui/icons/Update";
 import ViewIcon from "@material-ui/icons/ViewComfy";
-
+import { createToast } from '../../components/Toast/Toast';
 import { api } from "../../services/api/index";
 
 const CssTextField = withStyles({
@@ -82,98 +82,52 @@ class Profile extends React.Component {
     const createData = (id, name, restaurants) => {
       return { id, name, restaurants };
     };
-
-    fetch(
-      "https://ufoodapi.herokuapp.com/unsecure/users/5fac0ba5fed821000485521f/favorites"
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result.items);
-        const rows = [];
-        result.items.map((item) => {
-          rows.push(createData(item.id, item.name, item.restaurants));
-        });
-        this.setState({ rowData: rows });
-        if (rows.length > 0) {
-          //this.getRestaurants();
-          this.setState({ tempName: rows[0].name });
-        } else {
-          this.setState({ restaurants: [] });
-        }
+    api.getUserFavorites()
+    .then((restaurants) => {
+      const rows = [];
+      restaurants.map((item) => {
+        rows.push(createData(item.id, item.name, item.restaurants));
       });
+      this.setState({ rowData: rows });
+      if (rows.length > 0)
+        this.setState({ tempName: rows[0].name });
+      else
+        this.setState({ restaurants: [] });
+    })
   };
 
   viewContent = (index) => {
     this.setState({ restaurants: [] });
     this.state.rowData[index].restaurants.map((item) => {
-      //console.log(item.id);
-      fetch("https://ufoodapi.herokuapp.com/unsecure/restaurants/" + item.id)
-        .then((res) => res.json())
-        .then((result) => {
-          //console.log(result);
-          const temp = this.state.restaurants;
-          temp.push(result);
-          this.setState({ restaurants: temp });
-          //this.getUserVisits();
-        });
+      api.getRestaurantByID(item.id)
+      .then((restaurant) => {
+        this.setState({restaurants: [...this.state.restaurants, restaurant]});
+      })
     });
   };
 
   createFavorite = () => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: this.state.favName,
-        owner: "john@gmail.com",
-      }),
-    };
-
-    fetch("https://ufoodapi.herokuapp.com/unsecure/favorites", requestOptions)
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result.id);
-        this.getUserFavorites();
-        this.setState({ favName: "" });
-      });
+    api.addUserFavorite(this.state.favName)
+    .then(() => {
+      createToast({message: 'Created new Favorite List'});
+      this.getUserFavorites();
+    });
   };
 
   deleteFavorite = (id) => {
-    const requestOptions = {
-      method: "DELETE",
-    };
-
-    fetch(
-      "https://ufoodapi.herokuapp.com/unsecure/favorites/" + id,
-      requestOptions
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        this.getUserFavorites();
-      });
+    api.deleteUserFavorite(id)
+    .then(() => {
+      createToast({message: 'Deleted List'});
+      this.getUserFavorites();
+    });
   };
 
   updateFavorite = (id) => {
-    console.log(this.state.tempName);
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: this.state.tempName,
-        owner: "john@gmail.com",
-      }),
-    };
-
-    fetch(
-      "https://ufoodapi.herokuapp.com/unsecure/favorites/" + id,
-      requestOptions
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        this.getUserFavorites();
-      });
+    api.editUserFavorite(id, this.state.tempName)
+    .then(() => {
+      createToast({message: 'Changed List Name'});
+      this.getUserFavorites();
+    });
   };
 
   componentDidMount() {

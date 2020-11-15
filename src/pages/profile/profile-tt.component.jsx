@@ -34,16 +34,13 @@ class Profile extends React.Component {
       this.setState({ visitedRestaurants: restos });
     });
     /*api.getUserFavorites().then((result) => {
-      this.setState({ favorites: result });
+      
     });
     */
-    fetch(
-      "https://ufoodapi.herokuapp.com/unsecure/users/5fac0ba5fed821000485521f/favorites"
-    )
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result.items);
-      });
+    api.getUserFavorites()
+    .then((result) => {
+      this.setState({ favorites: result });
+    });
   }
 
   render() {

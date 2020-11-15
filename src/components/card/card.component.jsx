@@ -15,6 +15,7 @@ import {
 
 import Rating from "@material-ui/lab/Rating";
 import VisitModal from "../visit-modal/visit-modal.component";
+import ViewVisitModal from '../view-visit-modal/view-visit-modal.component';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -76,18 +77,9 @@ export default function CardResto({ data, visited }) {
         </Link>
 
         {visited ? (
-          <Badge color="error" badgeContent={true} className={classes.margin}>
-            <Button
-              size="small"
-              color="primary"
-              disableRipple
-              style={{ cursor: "unset" }}
-            >
-              Visited
-            </Button>
-          </Badge>
+          <ViewVisitModal restaurant={data} text="View Rating"/>
         ) : (
-          <VisitModal restaurant={data} text="Comment" />
+          <VisitModal restaurant={data} text="Rate" />
         )}
       </CardActions>
     </Card>
