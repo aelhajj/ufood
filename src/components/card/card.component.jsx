@@ -90,9 +90,13 @@ export default function CardResto({ data, visited, deleteCard }) {
         </Link>
 
         {visited ? (
-          <ViewVisitModal restaurant={data} text="View Rating" />
+          <ViewVisitModal
+            restaurant={data}
+            text="View Rating"
+            visited={visited}
+          />
         ) : (
-          <VisitModal restaurant={data} text="Rate" />
+          <VisitModal restaurant={data} text="Rate" visited={visited} />
         )}
       </CardActions>
     </Card>

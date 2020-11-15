@@ -40,7 +40,6 @@ const CssTextField = withStyles({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    //backgroundColor: '#06233F',
     border: "1px solid black",
     color: theme.palette.common.white,
   },
@@ -132,14 +131,12 @@ class Profile extends React.Component {
   };
 
   deleteCard = (idRestaurant) => {
-    // console.log(this.state);
     api.removeFromFavorite(this.state.selectedList, idRestaurant).then(() => {
       createToast({ message: "Removed Restaurant From List" });
       this.getUserFavorites().then(() => {
         this.viewContent(this.state.selectedListIndex);
       });
     });
-    // console.log(idRestaurant);
   };
 
   componentDidMount() {

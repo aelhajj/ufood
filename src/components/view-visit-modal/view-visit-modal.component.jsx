@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Badge,
   Button,
   makeStyles,
   List,
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ViewVisitModal({ restaurant, user, text }) {
+export default function ViewVisitModal({ restaurant, user, text, visited }) {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -71,7 +72,7 @@ export default function ViewVisitModal({ restaurant, user, text }) {
       }
       setVisits(visitsForm);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, []);
 
   const handleOpen = () => {
@@ -114,9 +115,17 @@ export default function ViewVisitModal({ restaurant, user, text }) {
 
   return (
     <div>
-      <Button size="small" onClick={handleOpen} color="primary">
-        {text}
-      </Button>
+      {visited ? (
+        <Badge badgeContent={visits.length} color="secondary">
+          <Button size="small" onClick={handleOpen} color="primary">
+            {text}
+          </Button>
+        </Badge>
+      ) : (
+        <Button size="small" onClick={handleOpen} color="primary">
+          {text}
+        </Button>
+      )}
 
       <Modal
         open={open}
