@@ -47,7 +47,7 @@ export const api = new (class Api {
     const idUser = user.getIdUser();
     const auth = user.getAuthToken();
     return fetch(
-      `${this.baseUrl}/users/${idUser}/restaurants/${idRestaurant}/visits?limit=3`,
+      `${this.baseUrl}/users/${idUser}/restaurants/${idRestaurant}/visits`,
       {
         method: "get",
         headers: {

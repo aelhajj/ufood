@@ -7,6 +7,8 @@ import {
   ListItem,
   Paper,
   Typography,
+  GridList,
+  GridListTile
 } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Rating from "@material-ui/lab/Rating";
@@ -49,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(2, 4, 3),
   },
+  gridList: {
+    height: 450,
+    transform: 'translateZ(0)',
+  },
 }));
 
 export default function ViewVisitModal({ restaurant, user, text, visited }) {
@@ -57,7 +63,9 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
   const [open, setOpen] = useState(false);
   const [visits, setVisits] = useState([]);
 
-  useEffect(() => {
+
+
+  const updateView = () => {
     const options = {
       weekday: "long",
       year: "numeric",
@@ -72,10 +80,10 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
       }
       setVisits(visitsForm);
     });
-    // eslint-disable-next-line
-  }, []);
+  }
 
   const handleOpen = () => {
+    updateView();
     setOpen(true);
   };
 
@@ -86,9 +94,9 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Visits of {restaurant.name}</h2>
-      <List className={classes.list}>
+      <GridList cols={1} className={classes.gridList}>
         {visits.map((visit, index) => (
-          <ListItem key={index}>
+          <GridListTile key={index} cols={1} style={{height: 'auto'}}>
             <Paper elevation={1} className={classes.listItem}>
               <Typography gutterBottom variant="body1">
                 {visit.date}
@@ -104,15 +112,17 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
                 {visit.comment}
               </Typography>
             </Paper>
-          </ListItem>
+          </GridListTile>
         ))}
-      </List>
+      </GridList>
       <Button size="small" onClick={handleClose} color="primary">
         Close
       </Button>
     </div>
   );
-
+  useEffect(() => {
+    updateView();
+  }, []);
   return (
     <div>
       {visited ? (
