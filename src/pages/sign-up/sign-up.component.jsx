@@ -43,8 +43,8 @@ export default function SignUp() {
   const register = (event) => {
     event.preventDefault();
     const name = firstname + " " + lastname;
-    console.log("subbmited");
-    registerApi.registerUser(name, email, password);
+    const response = registerApi.registerUser(name, email, password);
+    console.log(response);
   };
 
   return (
