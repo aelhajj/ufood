@@ -40,7 +40,15 @@ export const api = new (class Api {
         Authorization: auth,
       },
       body: JSON.stringify(form),
-    }).then((res) => res.json());
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.status !== 401) return 1;
+        else return -1;
+      })
+      .catch((error) => {
+        console.log(error);
+      });;
   }
 
   getRestaurantVisit(idRestaurant) {
