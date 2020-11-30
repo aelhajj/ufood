@@ -12,6 +12,8 @@ import Homepage from "./pages/homepage/homepage.component";
 import Restaurant from "./components/restaurant/restaurant.component";
 import Profile from "./pages/profile/profile.component";
 import HeaderFood from "./components/header/header.component";
+import Login from "./pages/login/login.component";
+import SignUp from "./pages/sign-up/sign-up.component";
 
 const scheme = Layout();
 
@@ -54,6 +56,8 @@ function App() {
             <Route exact path="/" component={Homepage} />
             <Route exact path="/restaurant/:id/:edit" component={Restaurant} />
             <Route exact path="/profile/" component={Profile} />
+            <Route exact path="/login/" component={Login} />
+            <Route exact path="/signup/" component={SignUp} />
           </Switch>
         </main>
       </MuiThemeProvider>

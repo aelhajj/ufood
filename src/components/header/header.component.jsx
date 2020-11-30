@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 
 import SearchBox from "../search-box/search-box.component";
+import Login from "../../pages/login/login.component";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,11 +108,12 @@ export default function Header() {
                 </Link>
               </Box>
             ) : (
-              <Link>
+              <Link className="review-link" to={`/login/`}>
                 <Button
                   className="auth"
                   onClick={() => {
                     setLogged(true);
+                    
                   }}
                 >
                   Sign In
