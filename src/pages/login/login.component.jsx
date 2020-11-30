@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -52,16 +49,16 @@ export default function Login() {
       type: "info",
     });
     event.preventDefault();
-    const response = loginApi.registerUser(email, password).then((res) => {
+    const response = loginApi.logUser(email, password).then((res) => {
       if (res === 1) {
         setMessage({
           data: "Logged in successfully, redirecting...",
           type: "success",
         });
         setTimeout(() => {
-          // localStorage.setItem("token", data.token);
-          history.push("/");
-        }, 3000);
+          history.push("/profile");
+          window.location.reload(false);
+        }, 500);
         event.target.reset();
       } else {
         setMessage({
@@ -120,10 +117,6 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
           />
           <Button
             type="submit"

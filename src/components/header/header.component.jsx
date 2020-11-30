@@ -13,8 +13,7 @@ import {
 } from "@material-ui/core";
 
 import SearchBox from "../search-box/search-box.component";
-import Login from "../../pages/login/login.component";
-
+import { loginApi } from "../../services/user/login";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -84,7 +83,7 @@ export default function Header() {
                 inputProps={{ "aria-label": "search" }}
               />
             </div>
-            {logged ? (
+            {localStorage.getItem("token") ? (
               <div style={{ cursor: "pointer" }}>
                 <Link className="review-link" to={`/profile/`}>
                   <Avatar
@@ -94,13 +93,15 @@ export default function Header() {
                 </Link>
               </div>
             ) : null}
-            {logged ? (
+            {localStorage.getItem("token") ? (
               <Box ml={1}>
                 <Link to={`/`}>
                   <Button
                     className="auth"
                     onClick={() => {
+                      loginApi.logoutUser();
                       setLogged(false);
+                      window.location.reload(false);
                     }}
                   >
                     Sign Off
@@ -113,7 +114,6 @@ export default function Header() {
                   className="auth"
                   onClick={() => {
                     setLogged(true);
-                    
                   }}
                 >
                   Sign In

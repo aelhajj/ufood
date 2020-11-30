@@ -1,9 +1,10 @@
+
 export const loginApi = new (class {
   baseUrl = "https://ufoodapi.herokuapp.com";
 
-  registerUser(email, password) {
+  logUser(email, password) {
     const data =
-      "&email=" +
+      "email=" +
       encodeURIComponent(email) +
       "&password=" +
       encodeURIComponent(password);
@@ -15,13 +16,26 @@ export const loginApi = new (class {
       },
       body: data,
     })
+      .then((res) => res.json())
       .then((response) => {
-        if (response.status !== 401)
-         return 1;
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("userid", response.id);
+        localStorage.setItem("email", response.email);
+        if (response.status !== 401) return 1;
         else return -1;
       })
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  logoutUser() {
+    return fetch(`${this.baseUrl}/logout`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then(localStorage.clear());
   }
 })();
