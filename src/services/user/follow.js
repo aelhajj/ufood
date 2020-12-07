@@ -16,17 +16,26 @@ export const followApi = new (class {
     }).then((res) => res.json());
   }
 
-  getFollowers() {
-     const idUser = user.getIdUser();
-     const auth = user.getAuthToken();
-     return fetch(`${this.baseUrl}/users/${idUser}`, {
-       method: "get",
-       headers: {
-         "Content-Type": "application/json",
-         Authorization: auth,
-       },
-     })
-       .then((res) => res.json());
+  unfollowUser(userId) {
+    const auth = user.getAuthToken();
+    return fetch(`${this.baseUrl}/follow/${userId}`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth,
+      }
+    }).then((res) => res.json());
   }
 
+  getFollowers() {
+    const idUser = user.getIdUser();
+    const auth = user.getAuthToken();
+    return fetch(`${this.baseUrl}/users/${idUser}`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth,
+      },
+    }).then((res) => res.json());
+  }
 })();
