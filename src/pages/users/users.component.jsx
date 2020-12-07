@@ -1,43 +1,15 @@
 import React from "react";
 
 import {
-  Typography,
   LinearProgress,
-  List,
   CssBaseline,
-  Divider,
-  Card,
-  CardContent,
   Button,
-  ListItem,
 } from "@material-ui/core";
 
-import { withStyles } from "@material-ui/styles";
-import PropTypes from "prop-types";
+import FollowCard from "../../components/follow-card/follow-card.component";
 
 import { users } from "../../services/user/users";
 import { followApi } from "../../services/user/follow";
-
-const styles = (theme) => ({
-  card: {
-    position: "relative",
-    display: "flex",
-    height: "100%",
-    flexDirection: "row",
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  title: {
-    fontSize: 14,
-  },
-  padding: {
-    padding: theme.spacing(0, 2),
-  },
-});
 
 class Users extends React.Component {
   constructor(props) {
@@ -83,7 +55,6 @@ class Users extends React.Component {
 
   render() {
     const { user, loading } = this.state;
-    const { classes } = this.props;
 
     if (loading) {
       return (
@@ -114,43 +85,10 @@ class Users extends React.Component {
           </Button>
         </div>
         <CssBaseline />
-        <Card className={classes.card}>
-          <List>
-            <Typography
-              gutterBottom
-              className={classes.title}
-              variant="overline"
-              component="h2"
-            >
-              Followers :
-            </Typography>
-            <CardContent className={classes.cardContent}>
-              {this.state.followers.map((index) => {
-                return <ListItem key={index.id}>{index.name}</ListItem>;
-              })}
-            </CardContent>
-            <Divider />
-            <CardContent className={classes.cardContent}>
-              <Typography
-                className={classes.title}
-                gutterBottom
-                variant="overline"
-                component="h2"
-              >
-                Following :
-              </Typography>
-              {this.state.following.map((index) => {
-                return <ListItem key={index.id}>{index.name}</ListItem>;
-              })}
-            </CardContent>
-          </List>
-        </Card>
+        <FollowCard followers={this.state.followers} following={this.state.following} />
       </div>
     );
   }
 }
 
-Users.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-export default withStyles(styles)(Users);
+export default Users;

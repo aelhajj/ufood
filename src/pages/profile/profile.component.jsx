@@ -3,7 +3,6 @@ import CardList from "../../components/card-list/card-list.component";
 import {
   Button,
   TextField,
-  Typography,
   withStyles,
   Table,
   TableBody,
@@ -12,13 +11,14 @@ import {
   TableHead,
   TableRow,
   Paper,
-  List,
-  Divider,
-  ListItem,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Clear";
 import UpdateIcon from "@material-ui/icons/Update";
 import ViewIcon from "@material-ui/icons/ViewComfy";
+
+import FollowCard from "../../components/follow-card/follow-card.component";
+
+
 import { createToast } from "../../components/Toast/Toast";
 import { api } from "../../services/api/index";
 import { followApi } from "../../services/user/follow";
@@ -172,21 +172,10 @@ class Profile extends React.Component {
           <h1>{user.name}</h1>
           <h2>SCORE: {user.rating}</h2>
         </div>
-        <List component={Paper}>
-          <Typography variant="overline" component="h2">
-            Followers :
-          </Typography>
-          {this.state.followers.map((index) => {
-            return <ListItem>{index.name}</ListItem>;
-          })}
-          <Divider />
-          <Typography variant="overline" component="h2">
-            Following :
-          </Typography>
-          {this.state.following.map((index) => {
-            return <ListItem>{index.name}</ListItem>;
-          })}
-        </List>
+        <FollowCard
+          followers={this.state.followers}
+          following={this.state.following}
+        />
 
         <div>
           <TextField
