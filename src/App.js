@@ -14,6 +14,7 @@ import Profile from "./pages/profile/profile.component";
 import HeaderFood from "./components/header/header.component";
 import Login from "./pages/login/login.component";
 import SignUp from "./pages/sign-up/sign-up.component";
+import Users from "./pages/users/users.component";
 
 const scheme = Layout();
 
@@ -66,6 +67,7 @@ function App() {
             <Route exact path="/profile/" component={authGuard(Profile)} />
             <Route exact path="/login/" component={Login} />
             <Route exact path="/signup/" component={SignUp} />
+            <Route exact path="/users/:id" component={Users} />
           </Switch>
         </main>
       </MuiThemeProvider>

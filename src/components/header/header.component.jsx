@@ -67,30 +67,30 @@ export default function Header() {
           <Link className="logo-container" to="/">
             <Logo className={classes.menuButton} width="60" height="60" />
           </Link>
-
           <div className="options" style={{ display: "flex" }}>
-            <div className="search-box" style={{ marginRight: "20px" }}>
-              {/* La barre de recherche sera implémentée a la remise 2*/}
-              <SearchBox
-                className={classes.search}
-                aria-label="search"
-                color="inherit"
-                placeholder="search"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
             {localStorage.getItem("token") ? (
-              <div style={{ cursor: "pointer" }}>
-                <Link className="review-link" to={`/profile/`}>
-                  <Avatar
-                    alt="avatar"
-                    src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
+              <div style={{ display: "flex" }}>
+                <div className="search-box" style={{ marginRight: "20px" }}>
+                  <SearchBox
+                    className={classes.search}
+                    aria-label="search"
+                    color="inherit"
+                    placeholder="search"
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.inputInput,
+                    }}
+                    inputProps={{ "aria-label": "search" }}
                   />
-                </Link>
+                </div>
+                <div style={{ cursor: "pointer" }}>
+                  <Link className="review-link" to={`/profile/`}>
+                    <Avatar
+                      alt="avatar"
+                      src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
+                    />
+                  </Link>
+                </div>
               </div>
             ) : null}
             {localStorage.getItem("token") ? (
