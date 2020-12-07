@@ -56,6 +56,7 @@ export default function VisitModal({ restaurant, user, text }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const [message, setMessage] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -66,6 +67,10 @@ export default function VisitModal({ restaurant, user, text }) {
   };
 
   const submitComment = (event) => {
+    setMessage({
+      data: "Login is in progress...",
+      type: "info",
+    });
     event.preventDefault();
     api
       .visitRestaurant({
@@ -74,8 +79,20 @@ export default function VisitModal({ restaurant, user, text }) {
         rating: rating,
         date: selectedDate,
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         setOpen(false);
+        if (res === 1) {
+          setMessage({
+            data: "Restaurant added to visited",
+            type: "success",
+          });
+        } else {
+          setMessage({
+            data: "Restaurant not added.. Are you connected ?",
+            type: "error",
+          });
+        }
         setShowAlert(true);
       });
   };
@@ -155,7 +172,7 @@ export default function VisitModal({ restaurant, user, text }) {
         autoHideDuration={3000}
         message="Note archived"
       >
-        <Alert severity="success">Restaurant Added to Visited</Alert>
+        <Alert severity={message.type}>{message.data}</Alert>
       </Snackbar>
       <Button size="small" onClick={handleOpen} color="primary">
         {text}

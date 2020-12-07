@@ -81,28 +81,34 @@ class Restaurant extends React.Component {
           <Grid item xs={4}>
             <h1>{restaurant.name}</h1>
           </Grid>
-          <Grid
-            item
-            xs={8}
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="center"
-          >
-            <Grid item xs={3}>
-              <VisitModal restaurant={restaurant} text="Mark Visited" />
+
+          {localStorage.getItem("token") ? (
+            <Grid
+              item
+              xs={8}
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="center"
+            >
+              <Grid item xs={3}>
+                <VisitModal restaurant={restaurant} text="Mark Visited" />
+              </Grid>
+              <Grid item xs={3}>
+                <FavoriteModal
+                  restaurant={restaurant}
+                  text="Add to favorites"
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <ViewVisitModal
+                  restaurant={restaurant}
+                  visited={false}
+                  text="View visits"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={3}>
-              <FavoriteModal restaurant={restaurant} text="Add to favorites" />
-            </Grid>
-            <Grid item xs={2}>
-              <ViewVisitModal
-                restaurant={restaurant}
-                visited={false}
-                text="View visits"
-              />
-            </Grid>
-          </Grid>
+          ) : null}
         </Grid>
         <Grid item xs={6}>
           {restaurant.genres.map((index) => (

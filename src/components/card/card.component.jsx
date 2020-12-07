@@ -87,16 +87,19 @@ export default function CardResto({ data, visited, deleteCard }) {
             Directions
           </Button>
         </Link>
-
-        {visited ? (
-          <ViewVisitModal
-            restaurant={data}
-            text="View Rating"
-            visited={visited}
-          />
-        ) : (
-          <VisitModal restaurant={data} text="Rate" visited={visited} />
-        )}
+        {localStorage.getItem("token") ? (
+          <span>
+            {visited ? (
+              <ViewVisitModal
+                restaurant={data}
+                text="View Rating"
+                visited={visited}
+              />
+            ) : (
+              <VisitModal restaurant={data} text="Rate" visited={visited} />
+            )}
+          </span>
+        ) : null}
       </CardActions>
     </Card>
   );

@@ -1,4 +1,3 @@
-
 export const loginApi = new (class {
   baseUrl = "https://ufoodapi.herokuapp.com";
 
@@ -35,7 +34,6 @@ export const loginApi = new (class {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    })
-      .then(localStorage.clear());
+    }).then(localStorage.clear());
   }
 })();
