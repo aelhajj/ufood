@@ -22,7 +22,10 @@ const authGuard = (Component) => () => {
   return localStorage.getItem("token") ? (
     <Component />
   ) : (
-    <Redirect to="/login" />
+    <Redirect to={{
+    pathname: '/login',
+    state: { redirected : true }
+  }}/>
   );
 };
 
@@ -67,7 +70,7 @@ function App() {
             <Route exact path="/profile/" component={authGuard(Profile)} />
             <Route exact path="/login/" component={Login} />
             <Route exact path="/signup/" component={SignUp} />
-            <Route exact path="/users/:id" component={Users} />
+            <Route exact path="/users/:id" component={authGuard(Users)} />
           </Switch>
         </main>
       </MuiThemeProvider>
