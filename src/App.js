@@ -6,14 +6,28 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import Layout, { Root } from "@mui-treasury/layout";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Toast from "./components/Toast/Toast";
 import Homepage from "./pages/homepage/homepage.component";
 import Restaurant from "./components/restaurant/restaurant.component";
 import Profile from "./pages/profile/profile.component";
 import HeaderFood from "./components/header/header.component";
+import Login from "./pages/login/login.component";
+import SignUp from "./pages/sign-up/sign-up.component";
+import Users from "./pages/users/users.component";
 
 const scheme = Layout();
+
+const authGuard = (Component) => () => {
+  return localStorage.getItem("token") ? (
+    <Component />
+  ) : (
+    <Redirect to={{
+    pathname: '/login',
+    state: { redirected : true }
+  }}/>
+  );
+};
 
 const theme = createMuiTheme({
   palette: {
@@ -53,7 +67,10 @@ function App() {
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/restaurant/:id/:edit" component={Restaurant} />
-            <Route exact path="/profile/" component={Profile} />
+            <Route exact path="/profile/" component={authGuard(Profile)} />
+            <Route exact path="/login/" component={Login} />
+            <Route exact path="/signup/" component={SignUp} />
+            <Route exact path="/users/:id" component={authGuard(Users)} />
           </Switch>
         </main>
       </MuiThemeProvider>

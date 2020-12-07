@@ -3,7 +3,6 @@ import CardList from "../../components/card-list/card-list.component";
 import {
   Button,
   TextField,
-  Typography,
   withStyles,
   Table,
   TableBody,
@@ -16,8 +15,13 @@ import {
 import DeleteIcon from "@material-ui/icons/Clear";
 import UpdateIcon from "@material-ui/icons/Update";
 import ViewIcon from "@material-ui/icons/ViewComfy";
+
+import FollowCard from "../../components/follow-card/follow-card.component";
+
+
 import { createToast } from "../../components/Toast/Toast";
 import { api } from "../../services/api/index";
+import { followApi } from "../../services/user/follow";
 
 const CssTextField = withStyles({
   root: {
@@ -70,6 +74,8 @@ class Profile extends React.Component {
       user: [],
       favName: "",
       tempName: "",
+      following: [],
+      followers: [],
       rowData: [],
       restaurants: [],
       selectedList: null,
@@ -144,6 +150,10 @@ class Profile extends React.Component {
       this.setState({ user: result });
     });
     this.getUserFavorites();
+    followApi.getFollowers().then((res) => {
+      this.setState({ followers: res.followers });
+      this.setState({ following: res.following });
+    });
   }
 
   render() {
@@ -162,6 +172,10 @@ class Profile extends React.Component {
           <h1>{user.name}</h1>
           <h2>SCORE: {user.rating}</h2>
         </div>
+        <FollowCard
+          followers={this.state.followers}
+          following={this.state.following}
+        />
 
         <div>
           <TextField
