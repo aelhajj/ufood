@@ -6,6 +6,7 @@ import {
   Button,
 } from "@material-ui/core";
 
+import Gravatar from "react-gravatar";
 import FollowCard from "../../components/follow-card/follow-card.component";
 
 import { users } from "../../services/user/users";
@@ -66,9 +67,15 @@ class Users extends React.Component {
     return (
       <div style={{ padding: "30px" }}>
         <div style={{ textAlign: "center" }}>
-          <img
+          <Gravatar
             alt="avatar"
-            src={`https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png`}
+            email={user.email}
+            size={300}
+            rating="g"
+            default="mp"
+            className="avatar"
+            style={{ margin: "10px" }}
+            protocol="https://"
             width={200}
             height={200}
             style={{ borderRadius: "50%" }}
@@ -85,7 +92,10 @@ class Users extends React.Component {
           </Button>
         </div>
         <CssBaseline />
-        <FollowCard followers={this.state.followers} following={this.state.following} />
+        <FollowCard
+          followers={this.state.followers}
+          following={this.state.following}
+        />
       </div>
     );
   }

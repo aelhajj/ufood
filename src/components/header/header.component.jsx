@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 
@@ -6,11 +6,12 @@ import {
   AppBar,
   Button,
   Toolbar,
-  Avatar,
   CssBaseline,
   makeStyles,
   Box,
 } from "@material-ui/core";
+
+import Gravatar from "react-gravatar";
 
 import SearchBox from "../search-box/search-box.component";
 import { loginApi } from "../../services/user/login";
@@ -50,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Header() {
   const classes = useStyles();
-  const [logged, setLogged] = useState(false);
 
   return (
     <div className={classes.root}>
@@ -85,9 +85,15 @@ export default function Header() {
                 </div>
                 <div style={{ cursor: "pointer" }}>
                   <Link className="review-link" to={`/profile/`}>
-                    <Avatar
+                    <Gravatar
                       alt="avatar"
-                      src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
+                      email={localStorage.getItem("email")}
+                      size={40}
+                      rating="g"
+                      default="mp"
+                      className="avatar"
+                      protocol="https://"
+                      style={{ borderRadius: "50%" }}
                     />
                   </Link>
                 </div>
@@ -100,7 +106,6 @@ export default function Header() {
                     className="auth"
                     onClick={() => {
                       loginApi.logoutUser();
-                      setLogged(false);
                       window.location.reload(false);
                     }}
                   >
@@ -112,9 +117,6 @@ export default function Header() {
               <Link className="review-link" to={`/login/`}>
                 <Button
                   className="auth"
-                  onClick={() => {
-                    setLogged(true);
-                  }}
                 >
                   Sign In
                 </Button>

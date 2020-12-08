@@ -1,4 +1,5 @@
 import React from "react";
+import Gravatar from "react-gravatar";
 import CardList from "../../components/card-list/card-list.component";
 import {
   Button,
@@ -162,9 +163,15 @@ class Profile extends React.Component {
     return (
       <div style={{ padding: "30px" }}>
         <div style={{ textAlign: "center" }}>
-          <img
+          <Gravatar
             alt="avatar"
-            src={`https://images-na.ssl-images-amazon.com/images/I/61xvCroB3EL._AC_SL1000_.jpg`}
+            email={this.state.user.email}
+            size={300}
+            rating="g"
+            default="mp"
+            className="avatar"
+            style={{ margin: "10px" }}
+            protocol="https://"
             width={200}
             height={200}
             style={{ borderRadius: "50%" }}
