@@ -7,9 +7,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
+import { Alert } from "@material-ui/lab";
 import { registerApi } from "../../services/user/register";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,11 +39,36 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [lastname, setLastName] = useState("");
   const [firstname, setFirsName] = useState("");
+  const [message, setMessage] = useState();
+  const history = useHistory();
 
   const register = (event) => {
+    setMessage({
+      data: "Sign up is in progress...",
+      type: "info",
+    });
     event.preventDefault();
     const name = firstname + " " + lastname;
-    const response = registerApi.registerUser(name, email, password);
+    const response = registerApi
+      .registerUser(name, email, password)
+      .then((res) => {
+        if (res === 1) {
+          setMessage({
+            data: "Sign up successful, redirecting...",
+            type: "success",
+          });
+          setTimeout(() => {
+            history.push("/profile");
+            window.location.reload(false);
+          }, 500);
+          event.target.reset();
+        } else {
+          setMessage({
+            data: "Sorry could not sign up, email already in use",
+            type: "error",
+          });
+        }
+      });
     console.log(response);
   };
 
@@ -57,6 +82,12 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
+        {message && (
+          <Alert severity={message.type}>
+            {message.data}
+            <span aria-hidden="true" onClick={() => setMessage(null)}></span>
+          </Alert>
+        )}
         <ValidatorForm
           onSubmit={register}
           onError={(errors) => console.log(errors)}

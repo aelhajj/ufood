@@ -16,6 +16,13 @@ export const registerApi = new (class {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: data,
-    }).then((res) => console.log(res.json()));
+    })
+      .then((response) => {
+        if (response.status !== 401) return 1;
+        else return -1;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 })();
