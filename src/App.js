@@ -18,17 +18,6 @@ import Users from "./pages/users/users.component";
 
 const scheme = Layout();
 
-const authGuard = (Component) => () => {
-  return localStorage.getItem("token") ? (
-    <Component />
-  ) : (
-    <Redirect to={{
-    pathname: '/login',
-    state: { redirected : true }
-  }}/>
-  );
-};
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -57,6 +46,23 @@ const theme = createMuiTheme({
 });
 
 function App() {
+
+function AuthGuard({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        localStorage.getItem("token") ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: "/login", state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  );
+}
   return (
     <Root scheme={scheme}>
       <Toast />
@@ -67,10 +73,10 @@ function App() {
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/restaurant/:id/:edit" component={Restaurant} />
-            <Route exact path="/profile/" component={authGuard(Profile)} />
+            <AuthGuard exact path="/profile/" component={Profile} />
             <Route exact path="/login/" component={Login} />
             <Route exact path="/signup/" component={SignUp} />
-            <Route exact path="/users/:id" component={authGuard(Users)} />
+            <AuthGuard exact path="/users/:id" component={Users} />
           </Switch>
         </main>
       </MuiThemeProvider>

@@ -26,6 +26,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-maps": "^9.4.5",
+    "react-gravatar": "^2.6.3",
     "react-hook-form": "^6.12.1",
     "react-material-ui-form-validator": "^2.1.1",
     "react-photo-gallery": "^8.0.0",
