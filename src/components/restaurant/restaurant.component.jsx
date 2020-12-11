@@ -54,7 +54,7 @@ class Restaurant extends React.Component {
 
     if (loading) {
       return (
-        <div class="homepage">
+        <div className="homepage">
           <LinearProgress />
         </div>
       );
