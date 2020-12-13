@@ -16,6 +16,7 @@ import Rating from "@material-ui/lab/Rating";
 import VisitModal from "../visit-modal/visit-modal.component";
 import ViewVisitModal from "../view-visit-modal/view-visit-modal.component";
 import CloseIcon from "@material-ui/icons/Close";
+import { user } from "../../services/user";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -87,7 +88,7 @@ export default function CardResto({ data, visited, deleteCard }) {
             Directions
           </Button>
         </Link>
-        {localStorage.getItem("token") ? (
+        {user.getAuthToken() ? (
           <span>
             {visited ? (
               <ViewVisitModal

@@ -13,8 +13,11 @@ import {
 
 import Gravatar from "react-gravatar";
 
-import SearchBox from "../search-box/search-box.component";
 import { loginApi } from "../../services/user/login";
+import { ChargedSearchBar } from "../charged-search-bar/charged-search-bar";
+import { user } from "../../services/user";
+import { users } from "../../services/user/users";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -68,26 +71,19 @@ export default function Header() {
             <Logo className={classes.menuButton} width="60" height="60" />
           </Link>
           <div className="options" style={{ display: "flex" }}>
-            {localStorage.getItem("token") ? (
+            {user.getAuthToken() ? (
               <div style={{ display: "flex" }}>
                 <div className="search-box" style={{ marginRight: "20px" }}>
-                  <SearchBox
-                    className={classes.search}
-                    aria-label="search"
-                    color="inherit"
-                    placeholder="search"
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps={{ "aria-label": "search" }}
+                  <ChargedSearchBar
+                    label={"Search User"}
+                    query={users.getUsersSearch.bind(users)}
                   />
                 </div>
                 <div style={{ cursor: "pointer" }}>
                   <Link className="review-link" to={`/profile/`}>
                     <Gravatar
                       alt="avatar"
-                      email={localStorage.getItem("email")}
+                      email={user.getEmail()}
                       size={40}
                       rating="g"
                       default="mp"
@@ -99,7 +95,7 @@ export default function Header() {
                 </div>
               </div>
             ) : null}
-            {localStorage.getItem("token") ? (
+            {user.getAuthToken() ? (
               <Box ml={1}>
                 <Link to={`/`}>
                   <Button

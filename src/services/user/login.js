@@ -1,3 +1,5 @@
+import { user } from ".";
+
 export const loginApi = new (class {
   baseUrl = "https://ufoodapi.herokuapp.com";
 
@@ -17,9 +19,9 @@ export const loginApi = new (class {
     })
       .then((res) => res.json())
       .then((response) => {
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("userid", response.id);
-        localStorage.setItem("email", response.email);
+        user.setAuthToken(response.token);
+        user.setEmail(response.email);
+        user.setIdUser(response.id);
         if (response.status !== 401) return 1;
         else return -1;
       })
@@ -34,6 +36,8 @@ export const loginApi = new (class {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    }).then(localStorage.clear());
+    }).then(() => {
+      user.clear();
+    });
   }
 })();

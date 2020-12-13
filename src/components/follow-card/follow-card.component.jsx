@@ -40,27 +40,27 @@ export default function FollowCard({ followers, following }) {
         <Typography gutterBottom variant="h5" component="h2">
           Followers
         </Typography>
-        {followers.length === 0 ? (
-          <span>No followers</span>
-        ) : (
+        {followers && followers.length > 0 ? (
           <List>
             {followers.map((index) => {
               return <ListItem key={index.id}>{index.name}</ListItem>;
             })}
           </List>
-        )}
+        ) : (
+            <span>No followers</span>
+          )}
         <Typography gutterBottom variant="h5" component="h2">
           Following
         </Typography>
-        {following.length === 0 ? (
-          <span>No following</span>
-        ) : (
+        {followers && followers.length > 0 ? (
           <List>
             {following.map((index) => {
               return <ListItem key={index.id}>{index.name}</ListItem>;
             })}
           </List>
-        )}
+        ) : (
+            <span>No following</span>
+          )}
       </CardContent>
     </Card>
   );
