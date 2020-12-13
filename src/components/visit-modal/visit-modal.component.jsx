@@ -9,7 +9,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { api } from "../../services/api";
+import { visitApi } from "../../services/api/visits";
 
 const ratings = [
   { id: 0, rating: "☆☆☆☆☆" },
@@ -72,7 +72,7 @@ export default function VisitModal({ restaurant, text }) {
       type: "info",
     });
     event.preventDefault();
-    api
+    visitApi
       .visitRestaurant({
         restaurant_id: restaurant.id,
         comment: comment,

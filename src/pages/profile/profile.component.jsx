@@ -21,6 +21,7 @@ import FollowCard from "../../components/follow-card/follow-card.component";
 
 import { createToast } from "../../components/Toast/Toast";
 import { api } from "../../services/api/index";
+import { favoriteApi } from "../../services/api/favorites";
 import { followApi } from "../../services/user/follow";
 
 const CssTextField = withStyles({
@@ -88,7 +89,7 @@ class Profile extends React.Component {
     const createData = (id, name, restaurants) => {
       return { id, name, restaurants };
     };
-    return api.getUserFavorites().then((restaurants) => {
+    return favoriteApi.getUserFavorites().then((restaurants) => {
       const rows = [];
       restaurants.forEach((item) => {
         rows.push(createData(item.id, item.name, item.restaurants));
@@ -116,28 +117,28 @@ class Profile extends React.Component {
   };
 
   createFavorite = () => {
-    api.addUserFavorite(this.state.favName).then(() => {
+    favoriteApi.addUserFavorite(this.state.favName).then(() => {
       createToast({ message: "Created new Favorite List" });
       this.getUserFavorites();
     });
   };
 
   deleteFavorite = (id) => {
-    api.deleteUserFavorite(id).then(() => {
+    favoriteApi.deleteUserFavorite(id).then(() => {
       createToast({ message: "Deleted List" });
       this.getUserFavorites();
     });
   };
 
   updateFavorite = (id) => {
-    api.editUserFavorite(id, this.state.tempName).then(() => {
+    favoriteApi.editUserFavorite(id, this.state.tempName).then(() => {
       createToast({ message: "Changed List Name" });
       this.getUserFavorites();
     });
   };
 
   deleteCard = (idRestaurant) => {
-    api.removeFromFavorite(this.state.selectedList, idRestaurant).then(() => {
+    favoriteApi.removeFromFavorite(this.state.selectedList, idRestaurant).then(() => {
       createToast({ message: "Removed Restaurant From List" });
       this.getUserFavorites().then(() => {
         this.viewContent(this.state.selectedListIndex);

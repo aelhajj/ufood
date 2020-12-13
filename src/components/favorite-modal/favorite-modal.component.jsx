@@ -4,7 +4,7 @@ import { Alert } from "@material-ui/lab";
 import Modal from "@material-ui/core/Modal";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { api } from "../../services/api";
+import { favoriteApi } from "../../services/api/favorites";
 
 function getModalStyle() {
   const top = 50;
@@ -51,7 +51,7 @@ export default function FavoriteModal({ restaurant, user, text }) {
   };
 
   useEffect(() => {
-    api.getUserFavorites().then((list) => {
+    favoriteApi.getUserFavorites().then((list) => {
       const favorites = [];
       for (const item of list) {
         if (!item.name)
@@ -65,7 +65,7 @@ export default function FavoriteModal({ restaurant, user, text }) {
 
   const submitComment = (event) => {
     event.preventDefault();
-    api.addToFavorite(chosenList.id, restaurant.id).then(() => {
+    favoriteApi.addToFavorite(chosenList.id, restaurant.id).then(() => {
       setShowAlert(true);
       setOpen(false);
     });

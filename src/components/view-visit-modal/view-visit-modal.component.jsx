@@ -11,7 +11,7 @@ import {
 import Modal from "@material-ui/core/Modal";
 import Rating from "@material-ui/lab/Rating";
 
-import { api } from "../../services/api";
+import { visitApi } from "../../services/api/visits";
 
 function getModalStyle() {
   const top = 50;
@@ -68,7 +68,7 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
       month: "long",
       day: "numeric",
     };
-    api.getRestaurantVisit(restaurant.id).then((list) => {
+    visitApi.getRestaurantVisit(restaurant.id).then((list) => {
       const visitsForm = [];
       for (const item of list) {
         item.date = new Date(item.date).toLocaleDateString("en-CA", options);
