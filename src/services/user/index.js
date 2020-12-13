@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 export const user = new (class {
   getIdUser() {
@@ -6,11 +6,11 @@ export const user = new (class {
   }
 
   setIdUser(idUser) {
-    Cookies.set('userid', idUser);
+    Cookies.set("userid", idUser);
   }
 
   getEmail() {
-   return Cookies.get("email");
+    return Cookies.get("email");
   }
 
   setEmail(email) {
@@ -22,7 +22,7 @@ export const user = new (class {
   }
 
   setAuthToken(token) {
-    Cookies.set("token", token)
+    Cookies.set("token", token);
   }
 
   clear() {
@@ -30,5 +30,4 @@ export const user = new (class {
     Cookies.remove("email");
     Cookies.remove("userid");
   }
-
 })();

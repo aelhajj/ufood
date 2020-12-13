@@ -47,23 +47,22 @@ const theme = createMuiTheme({
 });
 
 function App() {
-
-function AuthGuard({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        user.getAuthToken() ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    />
-  );
-}
+  function AuthGuard({ component: Component, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={(props) =>
+          user.getAuthToken() ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{ pathname: "/login", state: { from: props.location } }}
+            />
+          )
+        }
+      />
+    );
+  }
   return (
     <Root scheme={scheme}>
       <Toast />

@@ -10,10 +10,9 @@ import FavoriteModal from "../favorite-modal/favorite-modal.component";
 import ViewVisitModal from "../view-visit-modal/view-visit-modal.component";
 
 import { withStyles } from "@material-ui/styles";
-import PropTypes from "prop-types";
-
 import { api } from "../../services/api";
 import { user } from "../../services/user";
+
 const styles = (theme) => ({
   paper: {
     padding: theme.spacing(1),
@@ -51,7 +50,6 @@ class Restaurant extends React.Component {
 
   render() {
     const { restaurant, loading } = this.state;
-    const { classes } = this.props;
 
     if (loading) {
       return (
@@ -140,9 +138,5 @@ class Restaurant extends React.Component {
     );
   }
 }
-
-Restaurant.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Restaurant);

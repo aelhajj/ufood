@@ -23,7 +23,7 @@ export const followApi = new (class {
       headers: {
         "Content-Type": "application/json",
         Authorization: auth,
-      }
+      },
     }).then((res) => res.json());
   }
 

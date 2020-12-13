@@ -47,8 +47,8 @@ export default function FollowCard({ followers, following }) {
             })}
           </List>
         ) : (
-            <span>No followers</span>
-          )}
+          <span>No followers</span>
+        )}
         <Typography gutterBottom variant="h5" component="h2">
           Following
         </Typography>
@@ -59,8 +59,8 @@ export default function FollowCard({ followers, following }) {
             })}
           </List>
         ) : (
-            <span>No following</span>
-          )}
+          <span>No following</span>
+        )}
       </CardContent>
     </Card>
   );

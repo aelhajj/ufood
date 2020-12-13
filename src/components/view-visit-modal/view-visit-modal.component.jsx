@@ -6,7 +6,7 @@ import {
   Paper,
   Typography,
   GridList,
-  GridListTile
+  GridListTile,
 } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Rating from "@material-ui/lab/Rating";
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   gridList: {
     height: 450,
-    transform: 'translateZ(0)',
+    transform: "translateZ(0)",
   },
 }));
 
@@ -60,8 +60,6 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const [visits, setVisits] = useState([]);
-
-
 
   const updateView = () => {
     const options = {
@@ -78,7 +76,7 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
       }
       setVisits(visitsForm);
     });
-  }
+  };
 
   const handleOpen = () => {
     updateView();
@@ -94,7 +92,7 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
       <h2 id="simple-modal-title">Visits of {restaurant.name}</h2>
       <GridList cols={1} className={classes.gridList}>
         {visits.map((visit, index) => (
-          <GridListTile key={index} cols={1} style={{height: 'auto'}}>
+          <GridListTile key={index} cols={1} style={{ height: "auto" }}>
             <Paper elevation={1} className={classes.listItem}>
               <Typography gutterBottom variant="body1">
                 {visit.date}
@@ -118,8 +116,10 @@ export default function ViewVisitModal({ restaurant, user, text, visited }) {
       </Button>
     </div>
   );
+
   useEffect(() => {
     updateView();
+    // eslint-disable-next-line
   }, []);
   return (
     <div>

@@ -19,7 +19,6 @@ import ViewIcon from "@material-ui/icons/ViewComfy";
 
 import FollowCard from "../../components/follow-card/follow-card.component";
 
-
 import { createToast } from "../../components/Toast/Toast";
 import { api } from "../../services/api/index";
 import { followApi } from "../../services/user/follow";
@@ -91,7 +90,7 @@ class Profile extends React.Component {
     };
     return api.getUserFavorites().then((restaurants) => {
       const rows = [];
-      restaurants.map((item) => {
+      restaurants.forEach((item) => {
         rows.push(createData(item.id, item.name, item.restaurants));
       });
       this.setState({ rowData: rows });
@@ -105,7 +104,7 @@ class Profile extends React.Component {
     const resto_id = [];
     this.setState({ restaurants: [] });
     this.state.rowData[index].restaurants.map((it) => resto_id.push(it.id));
-    Array.from(new Set(resto_id)).map((item) => {
+    Array.from(new Set(resto_id)).forEach((item) => {
       api.getRestaurantByID(item).then((restaurant) => {
         this.setState({
           selectedList: this.state.rowData[index].id,
@@ -170,11 +169,10 @@ class Profile extends React.Component {
             rating="g"
             default="mp"
             className="avatar"
-            style={{ margin: "10px" }}
+            style={{ margin: "10px", borderRadius: "50%" }}
             protocol="https://"
             width={200}
             height={200}
-            style={{ borderRadius: "50%" }}
           />
           <h1>{user.name}</h1>
           <h2>SCORE: {user.rating}</h2>

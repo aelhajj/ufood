@@ -48,7 +48,7 @@ export const api = new (class Api {
       })
       .catch((error) => {
         console.log(error);
-      });;
+      });
   }
 
   getRestaurantVisit(idRestaurant) {

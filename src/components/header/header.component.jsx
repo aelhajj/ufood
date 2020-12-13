@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 
@@ -101,8 +101,7 @@ export default function Header() {
                   <Button
                     className="auth"
                     onClick={() => {
-                      loginApi.logoutUser()
-                      .then(() => {
+                      loginApi.logoutUser().then(() => {
                         window.location.reload(false);
                       });
                     }}
@@ -113,11 +112,7 @@ export default function Header() {
               </Box>
             ) : (
               <Link className="review-link" to={`/login/`}>
-                <Button
-                  className="auth"
-                >
-                  Sign In
-                </Button>
+                <Button className="auth">Sign In</Button>
               </Link>
             )}
           </div>
