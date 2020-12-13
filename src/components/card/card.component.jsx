@@ -82,11 +82,16 @@ export default function CardResto({ data, visited, deleteCard }) {
             View
           </Button>
         </Link>
-        <Link className="review-link">
+        <a
+          className="review-link"
+          target="_blank"
+          rel="noreferrer"
+          href={`https://maps.google.com/?ll=${data.location.coordinates[1]},${data.location.coordinates[0]}`}
+        >
           <Button size="small" color="primary">
             Directions
           </Button>
-        </Link>
+        </a>
         {user.getAuthToken() ? (
           <span>
             {visited ? (
