@@ -15,6 +15,7 @@ import HeaderFood from "./components/header/header.component";
 import Login from "./pages/login/login.component";
 import SignUp from "./pages/sign-up/sign-up.component";
 import Users from "./pages/users/users.component";
+import { user } from "./services/user";
 
 const scheme = Layout();
 
@@ -52,7 +53,7 @@ function AuthGuard({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem("token") ? (
+        user.getAuthToken() ? (
           <Component {...props} />
         ) : (
           <Redirect

@@ -13,6 +13,7 @@ import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 
 import { api } from "../../services/api";
+import { user } from "../../services/user";
 const styles = (theme) => ({
   paper: {
     padding: theme.spacing(1),
@@ -82,7 +83,7 @@ class Restaurant extends React.Component {
             <h1>{restaurant.name}</h1>
           </Grid>
 
-          {localStorage.getItem("token") ? (
+          {user.getAuthToken() ? (
             <Grid
               item
               xs={8}
