@@ -27,15 +27,20 @@ export default class DirectionCard extends Component {
           <Box>
             <GoogleMapExample
               containerElement={
-                <div
-                  style={{ height: `300px`, width: "100%", margin: "20px 0px" }}
-                />
+                <div style={{ height: `300px`, width: "100%", margin: "20px 0px" }}/>
               }
               mapElement={<div style={{ height: `100%` }} />}
             />
-            <Button variant="contained" color="secondary">
-              Get Directions
-            </Button>
+            <a
+              className="review-link"
+              target="_blank"
+              rel="noreferrer"
+              href={`https://maps.google.com/?ll=${location.coordinates[1]},${location.coordinates[0]}`}
+            >
+              <Button variant="contained" color="secondary">
+                Get Directions
+              </Button>
+            </a>
           </Box>
           <Box mt={1}>
             <Typography variant="body1" className="aligned-box">

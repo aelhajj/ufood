@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import CardResto from "../card/card.component";
-import MapView from "../map-view";
+import MapView from "../map-view/map-view.component";
 
 import Grid from "@material-ui/core/Grid";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";

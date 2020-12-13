@@ -22,7 +22,7 @@ export default class InfoCard extends Component {
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Restaurent Info
+            Restaurant Information
           </Typography>
           <Box>
             <Typography variant="body1" className="aligned-box">

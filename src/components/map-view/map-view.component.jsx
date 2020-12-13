@@ -11,8 +11,8 @@ import {
 } from "react-google-maps";
 import Rating from "@material-ui/lab/Rating";
 
-import { styles } from "./mapStyle";
-import "./Maps.css";
+import { styles } from "./map-view.styles";
+import "./maps.styles.css";
 
 const DEFAULT_MAP_LOCATION = { lat: 46.8119889, lng: -71.2034528 };
 const DEFAULT_MAP_ZOOM = 9;

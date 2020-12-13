@@ -7,7 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Layout, { Root } from "@mui-treasury/layout";
 
 import { Switch, Route, Redirect } from "react-router-dom";
-import Toast from "./components/Toast/Toast";
+import Toast from "./components/toast/toast.component";
 import Homepage from "./pages/homepage/homepage.component";
 import Restaurant from "./components/restaurant/restaurant.component";
 import Profile from "./pages/profile/profile.component";

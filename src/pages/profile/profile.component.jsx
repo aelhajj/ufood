@@ -19,7 +19,7 @@ import ViewIcon from "@material-ui/icons/ViewComfy";
 
 import FollowCard from "../../components/follow-card/follow-card.component";
 
-import { createToast } from "../../components/Toast/Toast";
+import { createToast } from "../../components/toast/toast.component";
 import { api } from "../../services/api/index";
 import { favoriteApi } from "../../services/api/favorites";
 import { followApi } from "../../services/user/follow";
@@ -138,12 +138,14 @@ class Profile extends React.Component {
   };
 
   deleteCard = (idRestaurant) => {
-    favoriteApi.removeFromFavorite(this.state.selectedList, idRestaurant).then(() => {
-      createToast({ message: "Removed Restaurant From List" });
-      this.getUserFavorites().then(() => {
-        this.viewContent(this.state.selectedListIndex);
+    favoriteApi
+      .removeFromFavorite(this.state.selectedList, idRestaurant)
+      .then(() => {
+        createToast({ message: "Removed Restaurant From List" });
+        this.getUserFavorites().then(() => {
+          this.viewContent(this.state.selectedListIndex);
+        });
       });
-    });
   };
 
   componentDidMount() {
