@@ -3,8 +3,6 @@ import {
   Badge,
   Button,
   makeStyles,
-  List,
-  ListItem,
   Paper,
   Typography,
   GridList,
