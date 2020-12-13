@@ -101,8 +101,10 @@ export default function Header() {
                   <Button
                     className="auth"
                     onClick={() => {
-                      loginApi.logoutUser();
-                      window.location.reload(false);
+                      loginApi.logoutUser()
+                      .then(() => {
+                        window.location.reload(false);
+                      });
                     }}
                   >
                     Sign Off
